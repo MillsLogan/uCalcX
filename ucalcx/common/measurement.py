@@ -49,7 +49,7 @@ class Measurement:
             >>> print(new_measurement.value)
             0.005 # The value of the measurement in kilometers
             >>> print(new_measurement.unit)
-            KiloMeter # The unit of the measurement
+            kilometer # The unit of the measurement
         """
         
         if other.quantity != self.unit.quantity:

@@ -17,21 +17,19 @@ The `time` module provides classes for various units of time and their conversio
 
 For finer measurements of time, such as milliseconds, microseconds, and nanoseconds, you can use the metric prefixes of the `Second` class. This allows for precise measurement without needing separate classes for each small time unit.
 
-## Example Usage:
+Example:
 
-```python
-from ucalcx.time import Second, Minute, Hour
-
-# Create unit instances
-minute = Minute()
-seconds_in_minute = minute.to_base_unit(1)  # Converts 1 minute to seconds
-hours_in_minute = minute.convert(1, Hour())  # Converts 1 minute to hours
-
-print(f"1 minute is {seconds_in_minute} seconds.")
-# Output: 1 minute is 60 seconds.
-print(f"1 minute is {hours_in_minute} hours.")
-# Output: 1 minute is 0.016666666666666666 hours.
-```
+>>> from ucalcx.time import Second, Minute, Hour
+>>> # Create unit instances
+>>> minute = Minute()
+>>> # Create a measurement of 2 minutes
+>>> measurement = Measurement(2, minute)
+>>> print(measurement)
+2 min
+>>> # Convert the measurement to hours
+>>> measurement_in_hours = measurement.convert_to(Hour())
+>>> print(measurement_in_hours)
+0.03333333333333333 h
 """
 
 

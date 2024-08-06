@@ -12,7 +12,7 @@ The `common` module contains universally used classes and enumerations that are 
 ## Classes:
     - :class:`common.measurement.Measurement`
     - :class:`common.unit.Unit`
-    - :class:`common.metric_prefixes.MetricPrefixes`
+    - :class:`common.metric_prefixes.MetricPrefix`
     - :class:`common.quantity.Quantity`
 """
 
