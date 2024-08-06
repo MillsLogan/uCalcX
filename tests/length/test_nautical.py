@@ -8,7 +8,7 @@ class TestCable(unittest.TestCase):
     def test_rod_attributes(self):
         self.assertEqual(self.rod.name, "cable")
         self.assertEqual(self.rod.symbol, "cbl")
-        self.assertEqual(self.rod.conversion_factor, 185.2)
+        self.assertEqual(self.rod.meters_per_unit, 185.2)
 
 class TestFathom(unittest.TestCase):
     def setUp(self):
@@ -17,7 +17,7 @@ class TestFathom(unittest.TestCase):
     def test_fathom_attributes(self):
         self.assertEqual(self.fathom.name, "fathom")
         self.assertEqual(self.fathom.symbol, "ftm")
-        self.assertEqual(self.fathom.conversion_factor, 1.8288)
+        self.assertEqual(self.fathom.meters_per_unit, 1.8288)
 
 class TestNauticalMile(unittest.TestCase):
     def setUp(self):
@@ -26,4 +26,4 @@ class TestNauticalMile(unittest.TestCase):
     def test_nautical_mile_attributes(self):
         self.assertEqual(self.nautical_mile.name, "nautical mile")
         self.assertEqual(self.nautical_mile.symbol, "nmi")
-        self.assertEqual(self.nautical_mile.conversion_factor, 1852)
+        self.assertEqual(self.nautical_mile.meters_per_unit, 1852)

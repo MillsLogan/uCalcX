@@ -4,15 +4,15 @@ class Unit:
 
     An abstract class that defines the required properties for a unit of measurement. Units can be characterized by their name, symbol, metric prefix, and the physical quantity they measure.
 
-    Attributes:
-        name (str): The name of the unit (e.g., "meter").
+    Parameters:
+        ame (str): The name of the unit (e.g., "meter").
         symbol (str): The symbol of the unit (e.g., "m").
         metric_prefix (MetricPrefix): The metric prefix associated with the unit.
         quantity (Quantity): The physical quantity that the unit measures.
-
-    Properties:
-        full_name: Returns the name of the unit with the prefix name prepended (e.g., "kilo meter").
-        full_symbol: Returns the symbol of the unit with the prefix symbol prepended (e.g., "km").
+    
+    ## Properties:
+    - `full_name`: The full name of the unit, including the metric prefix. (e.g., "kilometer")
+    - `full_symbol`: The full symbol of the unit, including the metric prefix. (e.g., "km")
     """
     
     def __init__(self, name: str, symbol: str, metric_prefix: 'MetricPrefix', quantity: 'Quantity'):

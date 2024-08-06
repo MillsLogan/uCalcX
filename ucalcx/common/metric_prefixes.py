@@ -11,7 +11,7 @@ class MetricPrefix(Enum):
         symbol (str): The symbol of the metric prefix.
         exponent (str): The exponent value of the metric prefix.
         name (str): The name of the metric prefix.
-        conversion_factor (float): The conversion factor of the metric prefix.
+        meters_per_unit (float): The conversion factor of the metric prefix.
 
     ## Methods:
         convert_to(other: MetricPrefixes, value: float) -> float:
@@ -94,7 +94,7 @@ class MetricPrefix(Enum):
         return self.value['exponent']
     
     @property
-    def conversion_factor(self) -> float:
+    def meters_per_unit(self) -> float:
         """ Returns the conversion factor of the metric prefix. """
 
         return 10 ** self.exponent

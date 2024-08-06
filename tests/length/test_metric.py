@@ -9,7 +9,7 @@ class TestMeter(unittest.TestCase):
     def test_meter_attributes(self):
         self.assertEqual(self.meter.name, "meter")
         self.assertEqual(self.meter.symbol, "m")
-        self.assertEqual(self.meter.conversion_factor, 1)
+        self.assertEqual(self.meter.meters_per_unit, 1)
 
     def test_conversion(self):
         value = 1

@@ -19,8 +19,6 @@ This module extends `LengthUnit` and supports metric prefixes for all units. It 
 - [Imperial Units Overview](https://en.wikipedia.org/wiki/Imperial_units)
 - [Nautical Units Overview](https://en.wikipedia.org/wiki/Nautical_mile)
 - [Land Measurement Units Overview](https://en.wikipedia.org/wiki/Chain_(unit))
-
-Additional units and submodules related to specific contexts or systems of measurement can be added as needed.
 """
 
 from ucalcx.length.length_unit import LengthUnit

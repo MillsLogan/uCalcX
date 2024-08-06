@@ -23,18 +23,17 @@ from ucalcx import MetricPrefix
 
 class Rod(LengthUnit):
     """
-    Represents the rod unit of length.
+    Represents the rod unit of length, commonly used in land measurement.
 
-    The rod is a unit of length used in land measurement and surveying.
-    1 rod = 5.0292 meters.
+    - **Name**: "rod"
+    - **Symbol**: "rd"
+    - **Meters per Unit**: 5.0292
 
-    Attributes:
-        name (str): The name of the unit, which is always "rod".
-        symbol (str): The symbol for the unit, which is always "rd".
-        conversion_factor (float): The conversion factor to convert from rod to meters (5.0292 meters).
+    Args:
+        metric_prefix (MetricPrefix): The metric prefix to apply to the rod unit. Defaults to `MetricPrefix.Base`.
 
-    ## External Resource:
-        [Rod on Wikipedia](https://en.wikipedia.org/wiki/Rod_(unit))
+    For more information about the rod and its usage, refer to the following resource:
+    - [Rod on Wikipedia](https://en.wikipedia.org/wiki/Rod_(unit))
     """
 
     def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base) -> None:
@@ -45,23 +44,21 @@ class Rod(LengthUnit):
             metric_prefix (MetricPrefix, optional): The metric prefix to use. Defaults to `MetricPrefix.Base`.
         """
 
-        super().__init__(name='rod', symbol='rd', metric_prefix=metric_prefix, conversion_factor=5.0292)
-
+        super().__init__(name='rod', symbol='rd', metric_prefix=metric_prefix, meters_per_unit=5.0292)
 
 class Chain(LengthUnit):
     """
-    Represents the chain unit of length.
+    Represents the chain unit of length, commonly used in land measurement.
 
-    The chain is a unit of length used in surveying and land measurement.
-    1 chain = 20.1168 meters.
+    - **Name**: "chain"
+    - **Symbol**: "ch"
+    - **Meters per Unit**: 20.1168
 
-    Attributes:
-        name (str): The name of the unit, which is always "chain".
-        symbol (str): The symbol for the unit, which is always "ch".
-        conversion_factor (float): The conversion factor to convert from chain to meters (20.1168 meters).
+    Args:
+        metric_prefix (MetricPrefix): The metric prefix to apply to the chain unit. Defaults to `MetricPrefix.Base`.
 
-    ## External Resource:
-        [Chain on Wikipedia](https://en.wikipedia.org/wiki/Chain_(unit))
+    For more information about the chain and its usage, refer to the following resource:
+    - [Chain on Wikipedia](https://en.wikipedia.org/wiki/Chain_(unit))
     """
 
     def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base) -> None:
@@ -72,23 +69,22 @@ class Chain(LengthUnit):
             metric_prefix (MetricPrefix, optional): The metric prefix to use. Defaults to `MetricPrefix.Base`.
         """
 
-        super().__init__(name='chain', symbol='ch', metric_prefix=metric_prefix, conversion_factor=20.1168)
+        super().__init__(name='chain', symbol='ch', metric_prefix=metric_prefix, meters_per_unit=20.1168)
 
 
 class Furlong(LengthUnit):
     """
-    Represents the furlong unit of length.
+    Represents the furlong unit of length, commonly used in land measurement.
 
-    The furlong is a unit of length historically used in horse racing and land measurement.
-    1 furlong = 201.168 meters.
+    - **Name**: "furlong"
+    - **Symbol**: "fur"
+    - **Meters per Unit**: 201.168
 
-    Attributes:
-        name (str): The name of the unit, which is always "furlong".
-        symbol (str): The symbol for the unit, which is always "fur".
-        conversion_factor (float): The conversion factor to convert from furlong to meters (201.168 meters).
+    Args:
+        metric_prefix (MetricPrefix): The metric prefix to apply to the furlong unit. Defaults to `MetricPrefix.Base`.
 
-    ## External Resource:
-        [Furlong on Wikipedia](https://en.wikipedia.org/wiki/Furlong)
+    For more information about the furlong and its usage, refer to the following resource:
+    - [Furlong on Wikipedia](https://en.wikipedia.org/wiki/Furlong)
     """
 
     def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base):
@@ -99,4 +95,4 @@ class Furlong(LengthUnit):
             metric_prefix (MetricPrefix, optional): The metric prefix to use. Defaults to `MetricPrefix.Base`.
         """
 
-        super().__init__(name='furlong', symbol='fur', metric_prefix=metric_prefix, conversion_factor=201.168)
+        super().__init__(name='furlong', symbol='fur', metric_prefix=metric_prefix, meters_per_unit=201.168)

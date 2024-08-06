@@ -24,20 +24,18 @@ from ucalcx import MetricPrefix
       
 class NauticalMile(LengthUnit):
     """
-    Represents the nautical mile unit of length.
+    Represents the nautical mile unit of length, commonly used in maritime and aviation contexts.
 
-    The nautical mile is a unit of length used in navigation and aviation, based on the Earth's circumference.
-    1 nautical mile = 1852 meters.
+    - **Name**: "nautical mile"
+    - **Symbol**: "NM"
+    - **Meters per Unit**: 1852.0
 
-    Attributes:
-        name (str): The name of the unit, which is always "nautical mile".
-        symbol (str): The symbol for the unit, which is always "nmi".
-        conversion_factor (float): The conversion factor to convert from nautical mile to meters (1852 meters).
+    Args:
+        metric_prefix (MetricPrefix): The metric prefix to apply to the nautical mile unit. Defaults to `MetricPrefix.Base`.
 
-    ## External Resource:
-        [Nautical Mile on Wikipedia](https://en.wikipedia.org/wiki/Nautical_mile)
+    For more information about the nautical mile and its usage, refer to the following resource:
+    - [Nautical Mile on Wikipedia](https://en.wikipedia.org/wiki/Nautical_mile)
     """
-
 
     def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base) -> None:
         """
@@ -52,20 +50,19 @@ class NauticalMile(LengthUnit):
         
 class Fathom(LengthUnit):
     """
-    Represents the fathom unit of length.
+    Represents the fathom unit of length, commonly used in nautical contexts.
 
-    The fathom is a unit of length used primarily to measure water depth in nautical contexts.
-    1 fathom = 1.8288 meters.
+    - **Name**: "fathom"
+    - **Symbol**: "ftm"
+    - **Meters per Unit**: 1.8288
 
-    Attributes:
-        name (str): The name of the unit, which is always "fathom".
-        symbol (str): The symbol for the unit, which is always "ftm".
-        conversion_factor (float): The conversion factor to convert from fathom to meters (1.8288 meters).
+    Args:
+        metric_prefix (MetricPrefix): The metric prefix to apply to the fathom unit. Defaults to `MetricPrefix.Base`.
 
-    ## External Resource:
-        [Fathom on Wikipedia](https://en.wikipedia.org/wiki/Fathom)
+    For more information about the fathom and its usage, refer to the following resource:
+    - [Fathom on Wikipedia](https://en.wikipedia.org/wiki/Fathom)
     """
-    
+
     def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base) -> None:
         """
         Initializes a Fathom unit with a specified metric prefix.
@@ -79,18 +76,17 @@ class Fathom(LengthUnit):
     
 class Cable(LengthUnit):
     """
-    Represents the cable unit of length.
+    Represents the cable unit of length, commonly used in nautical contexts.
 
-    The cable is a unit of length used in maritime contexts to measure distance at sea.
-    1 cable = 185.2 meters.
+    - **Name**: "cable"
+    - **Symbol**: "cable"
+    - **Meters per Unit**: 185.2
 
-    Attributes:
-        name (str): The name of the unit, which is always "cable".
-        symbol (str): The symbol for the unit, which is always "cbl".
-        conversion_factor (float): The conversion factor to convert from cable to meters (185.2 meters).
+    Args:
+        metric_prefix (MetricPrefix): The metric prefix to apply to the cable unit. Defaults to `MetricPrefix.Base`.
 
-    ## External Resource:
-        [Cable (Nautical) on Wikipedia](https://en.wikipedia.org/wiki/Cable_(unit))
+    For more information about the cable and its usage, refer to the following resource:
+    - [Cable on Wikipedia](https://en.wikipedia.org/wiki/Cable_length)
     """
     
     def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base) -> None:

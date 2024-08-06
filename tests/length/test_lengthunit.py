@@ -3,8 +3,8 @@ from ucalcx.length import LengthUnit
 from ucalcx import MetricPrefix, Quantity, Unit
 
 class DummyLengthUnit(LengthUnit):
-    def __init__(self, name, symbol, conversion_factor, metric_prefix=MetricPrefix.Base):
-        super().__init__(name=name, symbol=symbol, metric_prefix=metric_prefix, conversion_factor=conversion_factor)
+    def __init__(self, name, symbol, meters_per_unit, metric_prefix=MetricPrefix.Base):
+        super().__init__(name=name, symbol=symbol, metric_prefix=metric_prefix, meters_per_unit=meters_per_unit)
 
 
 class DummyTimeUnit(Unit):
@@ -14,8 +14,8 @@ class DummyTimeUnit(Unit):
 
 class TestLengthUnit(unittest.TestCase):
     def setUp(self):
-        self.unit1 = DummyLengthUnit(name="meter", symbol="m", conversion_factor=1.0)
-        self.unit2 = DummyLengthUnit(name="threemeters", symbol="3m", conversion_factor=3.0)
+        self.unit1 = DummyLengthUnit(name="meter", symbol="m", meters_per_unit=1.0)
+        self.unit2 = DummyLengthUnit(name="threemeters", symbol="3m", meters_per_unit=3.0)
     
     def test_conversion(self):
         # Test conversion from unit1 to unit2
@@ -36,7 +36,7 @@ class TestLengthUnit(unittest.TestCase):
 
     def test_conversion_to_other_prefix(self):
         # Test conversion from 'meter' to 'kilometer'
-        unit = DummyLengthUnit(name="kilometer", symbol="km", metric_prefix=MetricPrefix.Kilo, conversion_factor=1)
+        unit = DummyLengthUnit(name="kilometer", symbol="km", metric_prefix=MetricPrefix.Kilo, meters_per_unit=1)
         value = 1000.0
         converted_value = self.unit1.convert_to(unit, value)
         self.assertEqual(converted_value, 1.0)

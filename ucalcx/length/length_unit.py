@@ -11,7 +11,7 @@ class LengthUnit(Unit):
         name (str): The name of the length unit.
         symbol (str): The symbol for the length unit.
         metric_prefix (MetricPrefix): The metric prefix associated with the length unit.
-        conversion_factor (float): The conversion factor to convert this unit to meters.
+        meters_per_unit (float): The conversion factor to convert this unit to meters.
 
     ## Methods:
         convert_to(self, other: LengthUnit, value: float) -> float:
@@ -25,7 +25,7 @@ class LengthUnit(Unit):
         5.0
     """
     
-    def __init__(self, name: str, symbol: str, metric_prefix: 'MetricPrefix', conversion_factor: float) -> None:
+    def __init__(self, name: str, symbol: str, metric_prefix: 'MetricPrefix', meters_per_unit: float) -> None:
         """
         Initializes a new instance of the LengthUnit class.
 
@@ -33,12 +33,12 @@ class LengthUnit(Unit):
             name (str): The name of the length unit (e.g., "meter", "kilometer"). This is the descriptive term used to identify the unit.
             symbol (str): The symbol of the length unit (e.g., "m", "km"). This is the abbreviated representation used in calculations and measurements.
             metric_prefix (MetricPrefixes): The metric prefix associated with the length unit (e.g., `MetricPrefixes.Kilo` for kilo, `MetricPrefixes.Milli` for milli). This prefix is used to scale the unit and modify its magnitude.
-            conversion_factor (float): The factor used to convert this length unit to meters. This value represents how many meters are equivalent to one unit of this length.
+            meters_per_unit (float): The factor used to convert this length unit to meters. This value represents how many meters are equivalent to one unit of this length.
         """
         
         super().__init__(name, symbol, metric_prefix, Quantity.Length)
-        self.conversion_factor = conversion_factor
-        """ The conversion factor to meters. I.e. 1 meter = conversion_factor * value """
+        self.meters_per_unit = meters_per_unit
+        """ How many meters are equivalent to one unit of this length """
         
     def convert_to(self, other: 'LengthUnit', value: float) -> float:
         """
@@ -57,7 +57,7 @@ class LengthUnit(Unit):
         if other.quantity != Quantity.Length:
             raise ValueError("Cannot convert between different quantities")
 
-        this_to_other_factor: float = self.conversion_factor / other.conversion_factor
+        this_to_other_factor: float = self.meters_per_unit / other.meters_per_unit
         converted_value: float = value * this_to_other_factor
         if other.metric_prefix != self.metric_prefix:
             converted_value = self.metric_prefix.convert_to(other.metric_prefix, converted_value)

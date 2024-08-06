@@ -10,6 +10,6 @@ class TestMetricPrefix(unittest.TestCase):
         self.assertEqual(MetricPrefix.Centi.convert_to(MetricPrefix.Milli, 1), 10)
         self.assertEqual(MetricPrefix.Milli.convert_to(MetricPrefix.Centi, 10), 1)
 
-    def test_conversion_factor(self):
-        self.assertEqual(MetricPrefix.Centi.conversion_factor, 0.01)
-        self.assertEqual(MetricPrefix.Milli.conversion_factor, 0.001)
+    def test_meters_per_unit(self):
+        self.assertEqual(MetricPrefix.Centi.meters_per_unit, 0.01)
+        self.assertEqual(MetricPrefix.Milli.meters_per_unit, 0.001)

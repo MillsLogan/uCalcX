@@ -8,7 +8,7 @@ class TestFoot(unittest.TestCase):
     def test_foot_attributes(self):
         self.assertEqual(self.foot.name, "foot")
         self.assertEqual(self.foot.symbol, "ft")
-        self.assertEqual(self.foot.conversion_factor, 0.3048)
+        self.assertEqual(self.foot.meters_per_unit, 0.3048)
 
     def test_foot_to_yard(self):
         self.assertEqual(self.foot.convert_to(Yard(), 3), 1)
@@ -24,7 +24,7 @@ class TestYard(unittest.TestCase):
     def test_yard_attributes(self):
         self.assertEqual(self.yard.name, "yard")
         self.assertEqual(self.yard.symbol, "yd")
-        self.assertEqual(self.yard.conversion_factor, 0.9144)
+        self.assertEqual(self.yard.meters_per_unit, 0.9144)
 
     def test_yard_to_foot(self):
         self.assertEqual(self.yard.convert_to(Foot(), 1), 3)
@@ -36,7 +36,7 @@ class TestMile(unittest.TestCase):
     def test_mile_attributes(self):
         self.assertEqual(self.mile.name, "mile")
         self.assertEqual(self.mile.symbol, "mi")
-        self.assertEqual(self.mile.conversion_factor, 1609.344)
+        self.assertEqual(self.mile.meters_per_unit, 1609.344)
 
 class TestInch(unittest.TestCase):
     def setUp(self):
@@ -45,7 +45,7 @@ class TestInch(unittest.TestCase):
     def test_inch_attributes(self):
         self.assertEqual(self.inch.name, "inch")
         self.assertEqual(self.inch.symbol, "in")
-        self.assertEqual(self.inch.conversion_factor, 0.0254)
+        self.assertEqual(self.inch.meters_per_unit, 0.0254)
 
 class TestThou(unittest.TestCase):
     def setUp(self):
@@ -54,7 +54,7 @@ class TestThou(unittest.TestCase):
     def test_thou_attributes(self):
         self.assertEqual(self.thou.name, "thou")
         self.assertEqual(self.thou.symbol, "mil")
-        self.assertEqual(self.thou.conversion_factor, 0.0000254)
+        self.assertEqual(self.thou.meters_per_unit, 0.0000254)
 
 class TestHand(unittest.TestCase):
     def setUp(self):
@@ -63,4 +63,4 @@ class TestHand(unittest.TestCase):
     def test_hand_attributes(self):
         self.assertEqual(self.hand.name, "hand")
         self.assertEqual(self.hand.symbol, "h")
-        self.assertEqual(self.hand.conversion_factor, 0.1016)
+        self.assertEqual(self.hand.meters_per_unit, 0.1016)

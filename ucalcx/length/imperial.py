@@ -3,7 +3,7 @@
 
 The `length.imperial` module provides classes for units of length within the US Customary system. This module includes various length units used primarily in the United States, with support for applying metric prefixes. The default metric prefix for these units is `MetricPrefix.Base`.
 
-All units in this module are subclasses of the `LengthUnit` class, which provides the base functionality for handling length units. Each unit has a specific conversion factor that defines how it relates to the base unit of meters, and allows use of metric prefixes.
+This module extends `LengthUnit` and supports metric prefixes.
 
 ## Available Units:
 - **Foot**: Represents the foot unit of length.
@@ -32,19 +32,19 @@ from .length_unit import LengthUnit
 
 class Inch(LengthUnit):
     """
-    Represents the inch unit of length.
+    Represents the inch unit of length, commonly used in the imperial system.
 
-    The inch is a standard unit of length in the US Customary and British Imperial systems. 
-    1 inch = 25.4 millimeters.
+    - **Name**: "inch"
+    - **Symbol**: "in"
+    - **Meters per Unit**: 0.0254
 
-    Attributes:
-        name (str): The name of the unit, which is always "inch".
-        symbol (str): The symbol for the unit, which is always "in".
-        conversion_factor (float): The conversion factor to convert from inch to meters (0.0254 meters).
+    Args:
+        metric_prefix (MetricPrefix): The metric prefix to apply to the inch unit. Defaults to `MetricPrefix.Base`.
 
-    ## External Resource:
-        [Inch on Wikipedia](https://en.wikipedia.org/wiki/Inch)
+    For more information about the inch and its usage, refer to the following resource:
+    - [Inch on Wikipedia](https://en.wikipedia.org/wiki/Inch)
     """
+
     
     def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base) -> None:
         """
@@ -59,18 +59,17 @@ class Inch(LengthUnit):
     
 class Foot(LengthUnit):
     """
-    Represents the foot unit of length.
+    Represents the foot unit of length, commonly used in the imperial system.
 
-    The foot is a standard unit of length in the US Customary and British Imperial systems.
-    1 foot = 0.3048 meters.
+    - **Name**: "foot"
+    - **Symbol**: "ft"
+    - **Meters per Unit**: 0.3048
 
-    Attributes:
-        name (str): The name of the unit, which is always "foot".
-        symbol (str): The symbol for the unit, which is always "ft".
-        conversion_factor (float): The conversion factor to convert from foot to meters (0.3048 meters).
+    Args:
+        metric_prefix (MetricPrefix): The metric prefix to apply to the foot unit. Defaults to `MetricPrefix.Base`.
 
-    ## External Resource:
-        [Foot on Wikipedia](https://en.wikipedia.org/wiki/Foot_(unit))
+    For more information about the foot and its usage, refer to the following resource:
+    - [Foot on Wikipedia](https://en.wikipedia.org/wiki/Foot_(unit))
     """
     
     def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base) -> None:
@@ -86,19 +85,19 @@ class Foot(LengthUnit):
 
 class Yard(LengthUnit):
     """
-    Represents the yard unit of length.
+    Represents the yard unit of length, commonly used in the imperial system.
 
-    The yard is a standard unit of length in the US Customary and British Imperial systems.
-    1 yard = 0.9144 meters.
+    - **Name**: "yard"
+    - **Symbol**: "yd"
+    - **Meters per Unit**: 0.9144
 
-    Attributes:
-        name (str): The name of the unit, which is always "yard".
-        symbol (str): The symbol for the unit, which is always "yd".
-        conversion_factor (float): The conversion factor to convert from yard to meters (0.9144 meters).
+    Args:
+        metric_prefix (MetricPrefix): The metric prefix to apply to the yard unit. Defaults to `MetricPrefix.Base`.
 
-    ## External Resource:
-        [Yard on Wikipedia](https://en.wikipedia.org/wiki/Yard)
+    For more information about the yard and its usage, refer to the following resource:
+    - [Yard on Wikipedia](https://en.wikipedia.org/wiki/Yard)
     """
+
     
     def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base) -> None:
         """
@@ -113,20 +112,19 @@ class Yard(LengthUnit):
 
 class Mile(LengthUnit):
     """
-    Represents the mile unit of length.
+    Represents the mile unit of length, commonly used in the imperial system.
 
-    The mile is a standard unit of length in the US Customary and British Imperial systems.
-    1 mile = 1609.344 meters.
+    - **Name**: "mile"
+    - **Symbol**: "mi"
+    - **Meters per Unit**: 1609.34
 
-    Attributes:
-        name (str): The name of the unit, which is always "mile".
-        symbol (str): The symbol for the unit, which is always "mi".
-        conversion_factor (float): The conversion factor to convert from mile to meters (1609.344 meters).
+    Args:
+        metric_prefix (MetricPrefix): The metric prefix to apply to the mile unit. Defaults to `MetricPrefix.Base`.
 
-    ## External Resource:
-        [Mile on Wikipedia](https://en.wikipedia.org/wiki/Mile)
+    For more information about the mile and its usage, refer to the following resource:
+    - [Mile on Wikipedia](https://en.wikipedia.org/wiki/Mile)
     """
-    
+
     def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base):
         """
         Initializes a Mile unit with a specified metric prefix.
@@ -139,18 +137,17 @@ class Mile(LengthUnit):
 
 class Thou(LengthUnit):
     """
-    Represents the thou (or mil) unit of length.
+    Represents the thou (mil) unit of length, commonly used in engineering and manufacturing within the imperial system.
 
-    The thou (or mil) is a small unit of length commonly used in engineering and manufacturing.
-    1 thou = 0.001 inches (0.0000254 meters).
+    - **Name**: "thou"
+    - **Symbol**: "thou"
+    - **Meters per Unit**: 0.0000254
 
-    Attributes:
-        name (str): The name of the unit, which is always "thou".
-        symbol (str): The symbol for the unit, which is always "mil" or "thou".
-        conversion_factor (float): The conversion factor to convert from thou to meters (0.0000254 meters).
+    Args:
+        metric_prefix (MetricPrefix): The metric prefix to apply to the thou unit. Defaults to `MetricPrefix.Base`.
 
-    ## External Resource:
-        [Thou (Mil) on Wikipedia](https://en.wikipedia.org/wiki/Thou_(unit))
+    For more information about the thou and its usage, refer to the following resource:
+    - [Thou on Wikipedia](https://en.wikipedia.org/wiki/Thou_(unit))
     """
 
     def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base):
@@ -161,24 +158,24 @@ class Thou(LengthUnit):
             metric_prefix (MetricPrefix, optional): The metric prefix to use. Defaults to `MetricPrefix.Base`.
         """
 
-        super().__init__(name='thou', symbol='mil', metric_prefix=metric_prefix, conversion_factor=0.0000254)
+        super().__init__(name='thou', symbol='mil', metric_prefix=metric_prefix, meters_per_unit=0.0000254)
 
     
 class Hand(LengthUnit):
     """
-    Represents the hand unit of length.
+    Represents the hand unit of length, commonly used to measure the height of horses within the imperial system.
 
-    The hand is a unit of length traditionally used to measure the height of horses.
-    1 hand = 4 inches (0.1016 meters).
+    - **Name**: "hand"
+    - **Symbol**: "hh"
+    - **Meters per Unit**: 0.1016
 
-    Attributes:
-        name (str): The name of the unit, which is always "hand".
-        symbol (str): The symbol for the unit, which is always "h".
-        conversion_factor (float): The conversion factor to convert from hand to meters (0.1016 meters).
+    Args:
+        metric_prefix (MetricPrefix): The metric prefix to apply to the hand unit. Defaults to `MetricPrefix.Base`.
 
-    ## External Resource:
-        [Hand on Wikipedia](https://en.wikipedia.org/wiki/Hand_(unit))
+    For more information about the hand and its usage, refer to the following resource:
+    - [Hand on Wikipedia](https://en.wikipedia.org/wiki/Hand_(unit))
     """
+
 
     def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base):
         """
@@ -188,5 +185,5 @@ class Hand(LengthUnit):
             metric_prefix (MetricPrefix, optional): The metric prefix to use. Defaults to `MetricPrefix.Base`.
         """
         
-        super().__init__(name='hand', symbol='h', metric_prefix=metric_prefix, conversion_factor=0.1016)
+        super().__init__(name='hand', symbol='h', metric_prefix=metric_prefix, meters_per_unit=0.1016)
 
