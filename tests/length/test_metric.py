@@ -29,5 +29,3 @@ class TestMeter(unittest.TestCase):
     def test_representation(self):
         self.assertEqual(str(self.meter), "meter (m)")
 
-if __name__ == '__main__':
-    unittest.main()

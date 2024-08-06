@@ -45,6 +45,3 @@ class TestLengthUnit(unittest.TestCase):
         value = 1.0
         converted_value = unit.convert_to(self.unit1, value)
         self.assertEqual(converted_value, 1000.0)
-
-if __name__ == '__main__':
-    unittest.main()

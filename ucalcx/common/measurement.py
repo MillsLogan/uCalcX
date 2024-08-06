@@ -57,9 +57,6 @@ class Measurement:
         
         converted_value = self.unit.convert_to(other, self.value)
         return Measurement(converted_value, other)
-
-    def __repr__(self) -> str:
-        return "{}(value={}, unit={})".format(self.__class__, self.value, self.unit)
     
     def __str__(self) -> str:
         return f"{self.value} {self.unit.full_symbol}"

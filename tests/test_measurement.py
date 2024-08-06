@@ -27,6 +27,3 @@ class TestMeasurement(unittest.TestCase):
     def test_string_repersentation(self):
         self.assertEqual(str(self.measurement), "100 u1")
         self.assertEqual(str(self.measurement.convert_to(self.unit2)), "0.1 ku2")
-
-if __name__ == '__main__':
-    unittest.main()

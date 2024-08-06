@@ -28,5 +28,3 @@ class TestFurlong(unittest.TestCase):
         self.assertEqual(self.furlong.symbol, "fur")
         self.assertEqual(self.furlong.conversion_factor, 201.168)
 
-if __name__ == '__main__':
-    unittest.main()

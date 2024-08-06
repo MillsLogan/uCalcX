@@ -49,4 +49,11 @@ class Quantity(Enum):
     @property
     def name(self) -> str:
         """ Returns the name of the quantity. """
+        if self == Quantity.ElectricCurrent:
+            return "Electric Current"
+        elif self == Quantity.LuminousIntensity:
+            return "Luminous Intensity"
+        elif self == Quantity.AmountOfSubstance:
+            return "Amount of Substance"
+        
         return super().name

@@ -17,6 +17,3 @@ class TestUnit(unittest.TestCase):
         self.assertEqual(self.meter.full_symbol, "m")
         self.assertEqual(self.kilometer.full_symbol, "km")
         self.assertEqual(self.yoctometer.full_symbol, "ym")
-
-if __name__ == '__main__':
-    unittest.main()

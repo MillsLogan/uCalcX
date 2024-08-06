@@ -54,6 +54,3 @@ class TestHand(unittest.TestCase):
         self.assertEqual(self.hand.name, "hand")
         self.assertEqual(self.hand.symbol, "h")
         self.assertEqual(self.hand.conversion_factor, 0.1016)
-
-if __name__ == '__main__':
-    unittest.main()
