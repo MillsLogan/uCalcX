@@ -1,5 +1,8 @@
 import unittest
 from ucalcx import Measurement, Unit, MetricPrefix, Quantity
+from ucalcx.length.metric import Meter
+from ucalcx.length.imperial import Inch, Foot
+from ucalcx.time import Second, Minute, Hour, Day
 
 class DummyUnit(Unit):
     def __init__(self, name, symbol, metric_prefix, quantity):
@@ -27,3 +30,70 @@ class TestMeasurement(unittest.TestCase):
     def test_string_repersentation(self):
         self.assertEqual(str(self.measurement), "100 u1")
         self.assertEqual(str(self.measurement.convert_to(self.unit2)), "0.1 ku2")
+
+    def test_add_operator(self):
+        measurement2 = Measurement(200, self.unit1)
+        result = self.measurement + measurement2
+        self.assertEqual(result.value, 300)
+        self.assertEqual(result.unit, self.unit1)
+
+class TestLengthMeasurementOps(unittest.TestCase):
+    def setUp(self):
+        self.meter = Meter()
+        self.kilometer = Meter(MetricPrefix.Kilo)
+        self.inch = Inch()
+        self.foot = Foot()
+
+    def test_addition(self):
+        measurement1 = Measurement(100, self.meter)
+        measurement2 = Measurement(200, self.meter)
+        result = measurement1 + measurement2
+        self.assertEqual(result.value, 300)
+        self.assertEqual(result.unit, self.meter)
+
+    def test_add_conversion(self):
+        measurement1 = Measurement(100, self.meter)
+        measurement2 = Measurement(2, self.kilometer)
+        result = measurement1 + measurement2
+        self.assertEqual(result.value, 2100)
+        self.assertEqual(result.unit, self.meter)
+
+    def test_add_conversion_imperial(self):
+        measurement1 = Measurement(100, self.meter)
+        measurement2 = Measurement(2, self.foot)
+        result = measurement1 + measurement2
+        self.assertEqual(result.value, 100.6096)
+        self.assertEqual(result.unit, self.meter)
+
+    def test_scalar_multiplication(self):
+        measurement = Measurement(100, self.meter)
+        result = measurement.mul_scalar(2)
+        self.assertEqual(result.value, 200)
+        self.assertEqual(result.unit, self.meter)
+
+    def test_scalar_multiplication_imperial(self):
+        measurement = Measurement(100, self.foot)
+        result = measurement.mul_scalar(2)
+        self.assertEqual(result.value, 200)
+        self.assertEqual(result.unit, self.foot)
+
+class TestTimeMeasurementOps(unittest.TestCase):
+    def setUp(self):
+        self.second = Second()
+        self.minute = Minute()
+        self.hour = Hour()
+        self.day = Day()
+
+    def test_addition(self):
+        measurement1 = Measurement(100, self.second)
+        measurement2 = Measurement(200, self.second)
+        result = measurement1 + measurement2
+        self.assertEqual(result.value, 300)
+        self.assertEqual(result.unit, self.second)
+
+    def test_add_conversion(self):
+        measurement1 = Measurement(100, self.second)
+        measurement2 = Measurement(2, self.minute)
+        result = measurement1 + measurement2
+        self.assertEqual(result.value, 220)
+        self.assertEqual(result.unit, self.second)

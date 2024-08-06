@@ -59,7 +59,7 @@ class TimeUnit(Unit):
         - [Time on Wikipedia](https://en.wikipedia.org/wiki/Time)
         """
 
-        if other.quantity != Quantity.Length:
+        if other.quantity != Quantity.Time:
             raise ValueError("Cannot convert between different quantities")
 
 
