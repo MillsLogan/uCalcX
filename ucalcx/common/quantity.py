@@ -2,15 +2,24 @@ from enum import Enum
 
 
 class Quantity(Enum):
-    """ 
-    Enum class for physical quantities, representing their symbol and name. Physical quantities are
-    properties that can be measured, such as length, time, mass, etc. See https://en.wikipedia.org/wiki/SI_base_unit
-    to learn more about the SI base units.
-    
-    Each quantity is associated with:
-    - symbol: The symbol used to represent the quantity.
-    - name: The name of the quantity.
     """
+    # Quantity Enum
+
+    Represents the physical quantities that can be measured.
+
+    Attributes:
+        name (str): The name of the quantity (e.g., "Length").
+        symbol (str): The generally accepted variable symbol for the quantity (e.g., "L" for Length).
+
+    
+
+    Example:
+        >>> Quantity.Length.name
+        'Length'
+        >>> Quantity.Length.symbol
+        'L'
+    """
+
     
     Length = {'symbol': 'L'}
     """ Length (L) """
@@ -40,4 +49,4 @@ class Quantity(Enum):
     @property
     def name(self) -> str:
         """ Returns the name of the quantity. """
-        return self.name
+        return super().name

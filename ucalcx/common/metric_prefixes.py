@@ -3,12 +3,19 @@ from enum import Enum
 
 class MetricPrefix(Enum):
     """
-    Enum class for metric prefixes, representing their symbol and exponent value.
+    # MetricPrefix Enum
 
-    Each metric prefix is associated with:
-    - symbol: The symbol used to represent the prefix.
-    - exponent: The exponent value of 10 that the prefix represents. For example, the prefix 
-        'kilo' has an exponent value of 3, so 1 kilometer is equal to 1000 meters.
+    Provides the metric prefixes from yotta to yocto. Each prefix has an associated symbol, exponent value, and can be used for conversion between different metric prefixes.
+
+    Attributes:
+        symbol (str): The symbol of the metric prefix.
+        exponent (str): The exponent value of the metric prefix.
+        name (str): The name of the metric prefix.
+        conversion_factor (float): The conversion factor of the metric prefix.
+
+    ## Methods:
+        convert_to(other: MetricPrefixes, value: float) -> float:
+            Converts a value from the current metric prefix to another metric prefix.
     """
 
     Yotta = {'symbol': 'Y', 'exponent': 24}
@@ -77,39 +84,45 @@ class MetricPrefix(Enum):
     @property
     def symbol(self) -> str:
         """ Returns the symbol of the metric prefix. """
+        
         return self.value['symbol']
     
     @property
     def exponent(self) -> int:
         """ Returns the exponent value of the metric prefix. """
+
         return self.value['exponent']
     
     @property
     def conversion_factor(self) -> float:
         """ Returns the conversion factor of the metric prefix. """
+
         return 10 ** self.exponent
     
     @property
     def name(self) -> str:
         """ Returns the name of the metric prefix. """
-        return self.name
+
+        if self == MetricPrefix.Base:
+            return ""
+        return super().name.lower()
 
     def convert_to(self, other: 'MetricPrefix', value: float) -> float:
-        """ 
-        Converts a value from this metric prefix to another metric prefix. 
-        
+        """
+        Converts a value from the current metric prefix to another metric prefix.
+
+        This method calculates the conversion factor based on the difference in exponents between the two metric prefixes. It returns the value multiplied by 10 raised to the power of the difference in exponents.
+
         Args:
-        - other: The metric prefix to convert the value to.
-        - value: The value to convert.
-        
+            other (MetricPrefix): The target metric prefix to convert the value to.
+            value (float): The value to convert.
+
         Returns:
-        - The converted value.
-        
+            float: The value converted to the new metric prefix.
+
         Example:
-        >>> MetricPrefix.Kilo.convert_to(MetricPrefix.Mega, 1)
-        0.001
-        >>> MetricPrefix.Kilo.convert_to(MetricPrefix.Base, 1)
-        1000
+            >>> MetricPrefix.Kilo.convert_to(MetricPrefix.Mega, 1000)
+            1.0
         """
         
         return value * 10 ** (self.exponent - other.exponent)
