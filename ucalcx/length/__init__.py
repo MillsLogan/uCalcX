@@ -1,5 +1,6 @@
-from ucalcx.length.length_unit import LengthUnit, Meter, Foot, Yard, Mile
+from ucalcx.length.length_unit import LengthUnit
+from ucalcx.length import metric, imperial, nautical
 
 
-__all__ = ['LengthUnit', 'Meter', 'Foot', 'Yard', 'Mile']
+__all__ = ['LengthUnit', 'imperial', 'metric', 'nautical']
 

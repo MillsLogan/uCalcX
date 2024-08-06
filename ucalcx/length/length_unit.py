@@ -1,5 +1,4 @@
 from ucalcx import Unit, Quantity, Unit, MetricPrefix
-from abc import ABC, abstractmethod
 
 
 class LengthUnit(Unit):
@@ -10,6 +9,7 @@ class LengthUnit(Unit):
         
         super().__init__(name, symbol, metric_prefix, Quantity.Length)
         self.conversion_factor = conversion_factor
+        """ The conversion factor to meters. I.e. 1 meter = conversion_factor * self. """
         
     def _convert_to_meters(self, value: float) -> float:
         """ Converts a value to meters. """
@@ -36,41 +36,5 @@ class LengthUnit(Unit):
         converted_value = self._convert_to_meters(value)
         if other.metric_prefix != self.metric_prefix:
             converted_value = self.metric_prefix.convert_to(other.metric_prefix, converted_value)
-        return other._convert_from_meters(converted_value)
-    
-    
-class Meter(LengthUnit):
-    """ The meter is the base unit of length in the International System of Units (SI). """
-    
-    def __init__(self, metric_prefix: 'MetricPrefix' = MetricPrefix.Base):
-        """ Initializes a new meter unit. """
-        
-        super().__init__('Meter', 'm', metric_prefix, 1)
-    
-    
-class Foot(LengthUnit):
-    """ The foot is a unit of length in the imperial and US customary systems of measurement. """
-    
-    def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base):
-        """ Initializes a new foot unit. """
-        
-        super().__init__('Foot', 'ft', metric_prefix, 0.3048)
-        
+        return other._convert_from_meters(converted_value)        
 
-class Yard(LengthUnit):
-    """ The yard is a unit of length in the imperial and US customary systems of measurement. """
-    
-    def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base):
-        """ Initializes a new yard unit. """
-        
-        super().__init__('Yard', 'yd', metric_prefix, 0.9144)
-        
-
-class Mile(LengthUnit):
-    """ The mile is a unit of length in the imperial and US customary systems of measurement. """
-    
-    def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base):
-        """ Initializes a new mile unit. """
-        
-        super().__init__('Mile', 'mi', metric_prefix, 1609.344)
-    

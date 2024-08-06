@@ -1,6 +1,9 @@
 import unittest
-from ucalcx.length import Meter, Foot, Yard, Mile
+from ucalcx.length.metric import Meter
+from ucalcx.length.imperial import Foot, Yard, Mile
+from ucalcx.length.nautical import NauticalMile, Fathom, Cable
 from ucalcx import MetricPrefix, Measurement
+
 
 class TestMetricPrefix(unittest.TestCase):
     def test_meter_init(self):
@@ -31,6 +34,21 @@ class TestMetricPrefix(unittest.TestCase):
         mm = Measurement(1, Meter(MetricPrefix.Mega))
         mile = mm.convert_to(Mile())
         self.assertAlmostEqual(mile.value, 621.37119224, 6)
+        
+    def test_nautical_mile_to_meter(self):
+        nm = Measurement(1, NauticalMile())
+        m = nm.convert_to(Meter())
+        self.assertEqual(m.value, 1852)
+        
+    def test_fathom_to_meter(self):
+        f = Measurement(1, Fathom())
+        m = f.convert_to(Meter())
+        self.assertAlmostEqual(m.value, 1.8288, 6)
+        
+    def test_cable_to_meter(self):
+        c = Measurement(1, Cable())
+        m = c.convert_to(Meter())
+        self.assertEqual(m.value, 185.2)
         
 
 if __name__ == '__main__':
