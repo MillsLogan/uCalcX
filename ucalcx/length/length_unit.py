@@ -16,14 +16,6 @@ class LengthUnit(Unit):
     ## Methods:
         convert_to(self, other: LengthUnit, value: float) -> float:
             Converts the value from this length unit to another `LengthUnit`.
-        
-        _convert_to_meters(self, value: float) -> float:
-            Converts the value from this unit to meters.
-
-        _convert_from_meters(self, value: float) -> float:
-            Converts the value from meters to this unit.
-
-        
 
     Example:
         >>> length_unit = LengthUnit("meter", "m", MetricPrefixes.None_, 1.0)
@@ -48,37 +40,11 @@ class LengthUnit(Unit):
         self.conversion_factor = conversion_factor
         """ The conversion factor to meters. I.e. 1 meter = conversion_factor * value """
         
-    def _convert_to_meters(self, value: float) -> float:
-        """
-        Converts the given length value from this unit to meters.
-
-        Args:
-            value (float): The length value in this unit.
-
-        Returns:
-            float: The length value in meters.
-        """
-        
-        return value * self.conversion_factor
-    
-    def _convert_from_meters(self, value: float) -> float:
-        """
-        Converts a length value from meters to this unit.
-
-        Args:
-            value (float): The length value in meters.
-
-        Returns:
-            float: The length value in this unit.
-        """
-        
-        return value / self.conversion_factor
-        
     def convert_to(self, other: 'LengthUnit', value: float) -> float:
         """
         Converts the given length value from this unit to another `LengthUnit`.
 
-        The method first converts the value to meters. It then checks if the metric prefixes of the units match, performs a conversion if they don't, and finally converts the value from meters to the target unit.
+        The method converts the given length value from this unit to another `LengthUnit` using the meter as an intermediate unit.
 
         Args:
             other (LengthUnit): The target length unit to convert to.
@@ -91,8 +57,9 @@ class LengthUnit(Unit):
         if other.quantity != Quantity.Length:
             raise ValueError("Cannot convert between different quantities")
 
-        converted_value = self._convert_to_meters(value)
+        this_to_other_factor: float = self.conversion_factor / other.conversion_factor
+        converted_value: float = value * this_to_other_factor
         if other.metric_prefix != self.metric_prefix:
             converted_value = self.metric_prefix.convert_to(other.metric_prefix, converted_value)
-        return other._convert_from_meters(converted_value)        
+        return converted_value        
 

@@ -10,6 +10,13 @@ class TestFoot(unittest.TestCase):
         self.assertEqual(self.foot.symbol, "ft")
         self.assertEqual(self.foot.conversion_factor, 0.3048)
 
+    def test_foot_to_yard(self):
+        self.assertEqual(self.foot.convert_to(Yard(), 3), 1)
+
+    def test_foot_to_inch(self):
+        # TODO - Use exact conversions when possible, like between foot and inch
+        self.assertAlmostEqual(self.foot.convert_to(Inch(), 1), 12, places=6)
+
 class TestYard(unittest.TestCase):
     def setUp(self):
         self.yard = Yard()
@@ -18,6 +25,9 @@ class TestYard(unittest.TestCase):
         self.assertEqual(self.yard.name, "yard")
         self.assertEqual(self.yard.symbol, "yd")
         self.assertEqual(self.yard.conversion_factor, 0.9144)
+
+    def test_yard_to_foot(self):
+        self.assertEqual(self.yard.convert_to(Foot(), 1), 3)
 
 class TestMile(unittest.TestCase):
     def setUp(self):
