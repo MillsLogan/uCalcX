@@ -4,9 +4,9 @@ from ucalcx import Unit, MetricPrefix, Quantity
 
 class TestUnit(unittest.TestCase):
     def setUp(self):
-        self.meter = Unit("meter", "m", MetricPrefix.Base, Quantity.Length)
-        self.kilometer = Unit("meter", "m", MetricPrefix.Kilo, Quantity.Length)
-        self.yoctometer = Unit("meter", "m", MetricPrefix.Yocto, Quantity.Length)
+        self.meter = Unit.make_custom_unit("meter", "m", MetricPrefix.Base, Quantity.Length)
+        self.kilometer = Unit.make_custom_unit("meter", "m", MetricPrefix.Kilo, Quantity.Length)
+        self.yoctometer = Unit.make_custom_unit("meter", "m", MetricPrefix.Yocto, Quantity.Length)
 
     def test_full_name(self):
         self.assertEqual(self.meter.full_name, "meter")

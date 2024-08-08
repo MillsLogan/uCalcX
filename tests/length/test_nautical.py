@@ -24,6 +24,6 @@ class TestNauticalMile(unittest.TestCase):
         self.nautical_mile = NauticalMile()
     
     def test_nautical_mile_attributes(self):
-        self.assertEqual(self.nautical_mile.name, "nautical mile")
-        self.assertEqual(self.nautical_mile.symbol, "nmi")
+        self.assertEqual(self.nautical_mile.name, "nautical_mile")
+        self.assertEqual(self.nautical_mile.symbol, "NM")
         self.assertEqual(self.nautical_mile.meters_per_unit, 1852)

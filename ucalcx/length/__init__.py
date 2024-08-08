@@ -26,3 +26,19 @@ from ucalcx.length import metric, imperial, nautical, land
 
 __all__ = ['LengthUnit', 'imperial', 'metric', 'nautical', 'land']
 
+def get_all_units():
+    import inspect
+    """
+    Returns a list of all available length units across the different measurement systems.
+
+    Returns:
+        list: A list of all available length units.
+    """
+
+    all_units = []
+    all_units.extend(inspect.getmembers(metric, lambda x: inspect.isclass(x) and issubclass(x, LengthUnit) and x != LengthUnit))
+    all_units.extend(inspect.getmembers(imperial, lambda x: inspect.isclass(x) and issubclass(x, LengthUnit) and x != LengthUnit))
+    all_units.extend(inspect.getmembers(nautical, lambda x: inspect.isclass(x) and issubclass(x, LengthUnit) and x != LengthUnit))
+    all_units.extend(inspect.getmembers(land, lambda x: inspect.isclass(x) and issubclass(x, LengthUnit) and x != LengthUnit))
+
+    return list(map(lambda x: x[1], all_units))

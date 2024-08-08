@@ -24,8 +24,12 @@ class LengthUnit(Unit):
         >>> print(value_in_kilometers)
         5.0
     """
+    name: str
+    symbol: str
+    meters_per_unit: float
+    quantity: Quantity = Quantity.Length
     
-    def __init__(self, name: str, symbol: str, metric_prefix: 'MetricPrefix', meters_per_unit: float) -> None:
+    def __init__(self, metric_prefix: 'MetricPrefix') -> None:
         """
         Initializes a new instance of the LengthUnit class.
 
@@ -36,8 +40,7 @@ class LengthUnit(Unit):
             meters_per_unit (float): The factor used to convert this length unit to meters. This value represents how many meters are equivalent to one unit of this length.
         """
         
-        super().__init__(name, symbol, metric_prefix, Quantity.Length)
-        self.meters_per_unit = meters_per_unit
+        super().__init__(metric_prefix) 
         """ How many meters are equivalent to one unit of this length """
         
     def convert_to(self, other: 'LengthUnit', value: float) -> float:

@@ -3,13 +3,20 @@ from ucalcx.length import LengthUnit
 from ucalcx import MetricPrefix, Quantity, Unit
 
 class DummyLengthUnit(LengthUnit):
+    quantity = Quantity.Length
     def __init__(self, name, symbol, meters_per_unit, metric_prefix=MetricPrefix.Base):
-        super().__init__(name=name, symbol=symbol, metric_prefix=metric_prefix, meters_per_unit=meters_per_unit)
-
+        super().__init__(metric_prefix)
+        self.name = name
+        self.symbol = symbol
+        self.meters_per_unit = meters_per_unit
 
 class DummyTimeUnit(Unit):
-    def __init__(self, name, symbol, metric_prefix=MetricPrefix.Base):
-        super().__init__(name=name, symbol=symbol, metric_prefix=metric_prefix, quantity=Quantity.Time)
+    quantity = Quantity.Time
+    def __init__(self, name, symbol, metric_prefix=MetricPrefix.Base, seconds_per_unit=1.0):
+        super().__init__(metric_prefix)
+        self.name = name
+        self.symbol = symbol
+        self.seconds_per_unit = seconds_per_unit
 
 
 class TestLengthUnit(unittest.TestCase):

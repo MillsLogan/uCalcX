@@ -37,6 +37,10 @@ class NauticalMile(LengthUnit):
     - [Nautical Mile on Wikipedia](https://en.wikipedia.org/wiki/Nautical_mile)
     """
 
+    name: str = "nautical_mile"
+    symbol: str = "NM"
+    meters_per_unit: float = 1852.0
+
     def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base) -> None:
         """
         Initializes a Nautical Mile unit with a specified metric prefix.
@@ -45,7 +49,7 @@ class NauticalMile(LengthUnit):
             metric_prefix (MetricPrefix, optional): The metric prefix to use. Defaults to `MetricPrefix.Base`.
         """
 
-        super().__init__('nautical mile', 'nmi', metric_prefix, 1852)
+        super().__init__(metric_prefix)
         
         
 class Fathom(LengthUnit):
@@ -63,6 +67,10 @@ class Fathom(LengthUnit):
     - [Fathom on Wikipedia](https://en.wikipedia.org/wiki/Fathom)
     """
 
+    name: str = "fathom"
+    symbol: str = "ftm"
+    meters_per_unit: float = 1.8288
+
     def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base) -> None:
         """
         Initializes a Fathom unit with a specified metric prefix.
@@ -71,7 +79,7 @@ class Fathom(LengthUnit):
             metric_prefix (MetricPrefix, optional): The metric prefix to use. Defaults to `MetricPrefix.Base`.
         """
         
-        super().__init__('fathom', 'ftm', metric_prefix, 1.8288)
+        super().__init__(metric_prefix)
         
     
 class Cable(LengthUnit):
@@ -89,6 +97,10 @@ class Cable(LengthUnit):
     - [Cable on Wikipedia](https://en.wikipedia.org/wiki/Cable_length)
     """
     
+    name: str = "cable"
+    symbol: str = "cbl"
+    meters_per_unit: float = 185.2
+
     def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base) -> None:
         """
         Initializes a Cable unit with a specified metric prefix.
@@ -97,4 +109,4 @@ class Cable(LengthUnit):
             metric_prefix (MetricPrefix, optional): The metric prefix to use. Defaults to `MetricPrefix.Base`.
         """
         
-        super().__init__('cable', 'cbl', metric_prefix, 185.2)
+        super().__init__(metric_prefix)

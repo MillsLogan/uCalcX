@@ -6,7 +6,10 @@ from ucalcx.time import Second, Minute, Hour, Day
 
 class DummyUnit(Unit):
     def __init__(self, name, symbol, metric_prefix, quantity):
-        super().__init__(name, symbol, metric_prefix, quantity)
+        super().__init__(metric_prefix)
+        self.name = name
+        self.symbol = symbol
+        self.quantity = quantity
 
     def convert_to(self, other, value):
         return value * 10**(self.metric_prefix.exponent - other.metric_prefix.exponent)

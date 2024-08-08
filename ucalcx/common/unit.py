@@ -14,8 +14,12 @@ class Unit:
     - `full_name`: The full name of the unit, including the metric prefix. (e.g., "kilometer")
     - `full_symbol`: The full symbol of the unit, including the metric prefix. (e.g., "km")
     """
+    name: str
+    symbol: str
+    metric_prefix: 'MetricPrefix'
+    quantity: 'Quantity'
     
-    def __init__(self, name: str, symbol: str, metric_prefix: 'MetricPrefix', quantity: 'Quantity'):
+    def __init__(self, metric_prefix: 'MetricPrefix') -> None:
         """
         Initializes a new instance of the Unit class.
 
@@ -26,11 +30,30 @@ class Unit:
             quantity (Quantity): The physical quantity that the unit measures (e.g., `Quantity.Length` for length, `Quantity.Time` for time). This determines what kind of measurement the unit represents.
         """
         
-        self.name = name
-        self.symbol = symbol
         self.metric_prefix = metric_prefix
-        self.quantity = quantity
     
+    @classmethod
+    def make_custom_unit(cls, name: str, symbol: str, metric_prefix: 'MetricPrefix', quantity: 'Quantity') -> 'Unit':
+        """
+        Creates a custom unit with the specified name, symbol, and conversion factor to meters.
+
+        Args:
+            name (str): The name of the custom unit.
+            symbol (str): The symbol of the custom unit.
+            meters_per_unit (float): The conversion factor to convert this unit to meters.
+            metric_prefix (MetricPrefix): The metric prefix to apply to the custom unit.
+
+        Returns:
+            Unit: A custom unit object with the specified properties.
+        """
+        
+        custom_unit = cls(metric_prefix)
+        custom_unit.name = name
+        custom_unit.symbol = symbol
+        custom_unit.quantity = quantity
+        
+        return custom_unit
+
     @property
     def full_name(self) -> str:
         """ Returns the name of the unit with the metric prefix name prepended. """

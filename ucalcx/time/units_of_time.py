@@ -17,6 +17,10 @@ class Second(TimeUnit):
     - [Second on Wikipedia](https://en.wikipedia.org/wiki/Second)
     """
 
+    name: str = "second"
+    symbol: str = "s"
+    seconds_per_unit: float = 1.0
+
     def __init__(self, metric_prefix: MetricPrefix=MetricPrefix.Base) -> None:
         """
         Initializes a Second object with an optional metric prefix.
@@ -25,7 +29,7 @@ class Second(TimeUnit):
             metric_prefix (MetricPrefix): The metric prefix to apply to the minute unit. Defaults to `MetricPrefix.Base`.
         """
 
-        super().__init__('second', 's', metric_prefix, 1)        
+        super().__init__(metric_prefix)        
 
 
 class Minute(TimeUnit):
@@ -43,6 +47,9 @@ class Minute(TimeUnit):
     - [Minute on Wikipedia](https://en.wikipedia.org/wiki/Minute)
     """
 
+    name: str = "minute"
+    symbol: str = "min"
+    seconds_per_unit: float = 60.0
 
     def __init__(self, metric_prefix: MetricPrefix=MetricPrefix.Base) -> None:
         """
@@ -52,7 +59,7 @@ class Minute(TimeUnit):
             metric_prefix (MetricPrefix): The metric prefix to apply to the minute unit. Defaults to `MetricPrefix.Base`.
         """
 
-        super().__init__('minute', 'min', metric_prefix, 60)
+        super().__init__(metric_prefix)
 
 
 class Hour(TimeUnit):
@@ -70,6 +77,10 @@ class Hour(TimeUnit):
     - [Hour on Wikipedia](https://en.wikipedia.org/wiki/Hour)
     """
 
+    name: str = "hour"
+    symbol: str = "h"
+    seconds_per_unit: float = 3600.0
+
     def __init__(self, metric_prefix: MetricPrefix=MetricPrefix.Base) -> None:
         """
         Initializes an Hour object with an optional metric prefix.
@@ -86,7 +97,7 @@ class Hour(TimeUnit):
             h
         """
         
-        super().__init__('hour', 'h', metric_prefix, 3600)
+        super().__init__(metric_prefix)
 
 
 class Day(TimeUnit):
@@ -104,6 +115,10 @@ class Day(TimeUnit):
     - [Day on Wikipedia](https://en.wikipedia.org/wiki/Day)
     """
 
+    name: str = "day"
+    symbol: str = "d"
+    seconds_per_unit: float = 86400.0
+
     def __init__(self, metric_prefix: MetricPrefix=MetricPrefix.Base) -> None:
         """
         Initializes a Day object with an optional metric prefix.
@@ -112,7 +127,7 @@ class Day(TimeUnit):
             metric_prefix (MetricPrefix): The metric prefix to apply to the day unit. Defaults to `MetricPrefix.Base`.
         """
 
-        super().__init__('day', 'd', metric_prefix, 86400)
+        super().__init__(metric_prefix)
 
 
 class Week(TimeUnit):
@@ -130,6 +145,10 @@ class Week(TimeUnit):
     - [Week on Wikipedia](https://en.wikipedia.org/wiki/Week)
     """
 
+    name: str = "week"
+    symbol: str = "wk"
+    seconds_per_unit: float = 604800.0
+
     def __init__(self, metric_prefix: MetricPrefix=MetricPrefix.Base) -> None:
         """
         Initializes a Week object with an optional metric prefix.
@@ -138,7 +157,7 @@ class Week(TimeUnit):
             metric_prefix (MetricPrefix): The metric prefix to apply to the week unit. Defaults to `MetricPrefix.Base`.
         """
 
-        super().__init__('week', 'wk', metric_prefix, 604800)
+        super().__init__(metric_prefix)
 
 
 class Month(TimeUnit):
@@ -156,6 +175,10 @@ class Month(TimeUnit):
     - [Month on Wikipedia](https://en.wikipedia.org/wiki/Month)
     """
 
+    name: str = "month"
+    symbol: str = "mo"
+    seconds_per_unit: float = 2592000
+
     def __init__(self, metric_prefix: MetricPrefix=MetricPrefix.Base) -> None:
         """
         Initializes a Month object with an optional metric prefix.
@@ -164,7 +187,7 @@ class Month(TimeUnit):
             metric_prefix (MetricPrefix): The metric prefix to apply to the month unit. Defaults to `MetricPrefix.Base`.
         """
 
-        super().__init__('month', 'mo', metric_prefix, 2592000)
+        super().__init__(metric_prefix)
 
 
 class Year(TimeUnit):
@@ -182,6 +205,10 @@ class Year(TimeUnit):
     - [Year on Wikipedia](https://en.wikipedia.org/wiki/Year)
     """
 
+    name: str = "year"
+    symbol: str = "yr"
+    seconds_per_unit: float = 31536000
+
     def __init__(self, metric_prefix: MetricPrefix=MetricPrefix.Base) -> None:
         """
         Initializes a Year object with an optional metric prefix.
@@ -190,6 +217,6 @@ class Year(TimeUnit):
             metric_prefix (MetricPrefix): The metric prefix to apply to the year unit. Defaults to `MetricPrefix.Base`.
         """
 
-        super().__init__('year', 'yr', metric_prefix, 31536000)
+        super().__init__(metric_prefix)
 
 

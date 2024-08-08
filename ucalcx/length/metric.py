@@ -35,6 +35,10 @@ class Meter(LengthUnit):
     For more information about the meter and its usage, refer to the following resource:
     - [Meter on Wikipedia](https://en.wikipedia.org/wiki/Meter)
     """
+
+    symbol = 'm'
+    meters_per_unit = 1.0
+    name = "meter"
     
     def __init__(self, metric_prefix: 'MetricPrefix'=MetricPrefix.Base):
         """
@@ -46,4 +50,4 @@ class Meter(LengthUnit):
         Sets the unit name to "meter", the symbol to "m", and the conversion factor to 1.0, representing the base meter unit.
         """
         
-        super().__init__('meter', 'm', metric_prefix, 1)
+        super().__init__(metric_prefix)

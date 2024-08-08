@@ -45,6 +45,9 @@ class Inch(LengthUnit):
     - [Inch on Wikipedia](https://en.wikipedia.org/wiki/Inch)
     """
 
+    name: str = "inch"
+    symbol: str = "in"
+    meters_per_unit: float = 0.0254
     
     def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base) -> None:
         """
@@ -54,7 +57,7 @@ class Inch(LengthUnit):
             metric_prefix (MetricPrefix, optional): The metric prefix to use. Defaults to `MetricPrefix.Base`.
         """
         
-        super().__init__('inch', 'in', metric_prefix, 0.0254)
+        super().__init__(metric_prefix)
     
     
 class Foot(LengthUnit):
@@ -71,6 +74,10 @@ class Foot(LengthUnit):
     For more information about the foot and its usage, refer to the following resource:
     - [Foot on Wikipedia](https://en.wikipedia.org/wiki/Foot_(unit))
     """
+
+    name: str = "foot"
+    symbol: str = "ft"
+    meters_per_unit: float = 0.3048
     
     def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base) -> None:
         """
@@ -80,7 +87,7 @@ class Foot(LengthUnit):
             metric_prefix (MetricPrefix, optional): The metric prefix to use. Defaults to `MetricPrefix.Base`.
         """
         
-        super().__init__('foot', 'ft', metric_prefix, 0.3048)
+        super().__init__(metric_prefix)
         
 
 class Yard(LengthUnit):
@@ -98,6 +105,9 @@ class Yard(LengthUnit):
     - [Yard on Wikipedia](https://en.wikipedia.org/wiki/Yard)
     """
 
+    name: str = "yard"
+    symbol: str = "yd"
+    meters_per_unit: float = 0.9144
     
     def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base) -> None:
         """
@@ -107,7 +117,7 @@ class Yard(LengthUnit):
             metric_prefix (MetricPrefix, optional): The metric prefix to use. Defaults to `MetricPrefix.Base`.
         """
         
-        super().__init__('yard', 'yd', metric_prefix, 0.9144)
+        super().__init__(metric_prefix)
         
 
 class Mile(LengthUnit):
@@ -125,6 +135,10 @@ class Mile(LengthUnit):
     - [Mile on Wikipedia](https://en.wikipedia.org/wiki/Mile)
     """
 
+    name: str = "mile"
+    symbol: str = "mi"
+    meters_per_unit: float = 1609.344
+
     def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base):
         """
         Initializes a Mile unit with a specified metric prefix.
@@ -133,7 +147,7 @@ class Mile(LengthUnit):
             metric_prefix (MetricPrefix, optional): The metric prefix to use. Defaults to `MetricPrefix.Base`.
         """
         
-        super().__init__('mile', 'mi', metric_prefix, 1609.344)
+        super().__init__(metric_prefix)
 
 class Thou(LengthUnit):
     """
@@ -150,6 +164,10 @@ class Thou(LengthUnit):
     - [Thou on Wikipedia](https://en.wikipedia.org/wiki/Thou_(unit))
     """
 
+    name: str = "thou"
+    symbol: str = "mil"
+    meters_per_unit: float = 0.0000254
+
     def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base):
         """
         Initializes a Thou unit with a specified metric prefix.
@@ -158,7 +176,7 @@ class Thou(LengthUnit):
             metric_prefix (MetricPrefix, optional): The metric prefix to use. Defaults to `MetricPrefix.Base`.
         """
 
-        super().__init__(name='thou', symbol='mil', metric_prefix=metric_prefix, meters_per_unit=0.0000254)
+        super().__init__(metric_prefix)
 
     
 class Hand(LengthUnit):
@@ -176,6 +194,9 @@ class Hand(LengthUnit):
     - [Hand on Wikipedia](https://en.wikipedia.org/wiki/Hand_(unit))
     """
 
+    name: str = "hand"
+    symbol: str = "hh"
+    meters_per_unit: float = 0.1016
 
     def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base):
         """
@@ -185,5 +206,5 @@ class Hand(LengthUnit):
             metric_prefix (MetricPrefix, optional): The metric prefix to use. Defaults to `MetricPrefix.Base`.
         """
         
-        super().__init__(name='hand', symbol='h', metric_prefix=metric_prefix, meters_per_unit=0.1016)
+        super().__init__(metric_prefix)
 

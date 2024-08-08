@@ -62,5 +62,5 @@ class TestHand(unittest.TestCase):
     
     def test_hand_attributes(self):
         self.assertEqual(self.hand.name, "hand")
-        self.assertEqual(self.hand.symbol, "h")
+        self.assertEqual(self.hand.symbol, "hh")
         self.assertEqual(self.hand.meters_per_unit, 0.1016)

@@ -36,6 +36,10 @@ class Rod(LengthUnit):
     - [Rod on Wikipedia](https://en.wikipedia.org/wiki/Rod_(unit))
     """
 
+    name: str = "rod"
+    symbol: str = "rd"
+    meters_per_unit: float = 5.0292
+
     def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base) -> None:
         """
         Initializes a Rod unit with a specified metric prefix.
@@ -44,7 +48,7 @@ class Rod(LengthUnit):
             metric_prefix (MetricPrefix, optional): The metric prefix to use. Defaults to `MetricPrefix.Base`.
         """
 
-        super().__init__(name='rod', symbol='rd', metric_prefix=metric_prefix, meters_per_unit=5.0292)
+        super().__init__(metric_prefix)
 
 class Chain(LengthUnit):
     """
@@ -61,6 +65,10 @@ class Chain(LengthUnit):
     - [Chain on Wikipedia](https://en.wikipedia.org/wiki/Chain_(unit))
     """
 
+    name: str = "chain"
+    symbol: str = "ch"
+    meters_per_unit: float = 20.1168
+
     def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base) -> None:
         """
         Initializes a Chain unit with a specified metric prefix.
@@ -69,7 +77,7 @@ class Chain(LengthUnit):
             metric_prefix (MetricPrefix, optional): The metric prefix to use. Defaults to `MetricPrefix.Base`.
         """
 
-        super().__init__(name='chain', symbol='ch', metric_prefix=metric_prefix, meters_per_unit=20.1168)
+        super().__init__(metric_prefix)
 
 
 class Furlong(LengthUnit):
@@ -87,6 +95,10 @@ class Furlong(LengthUnit):
     - [Furlong on Wikipedia](https://en.wikipedia.org/wiki/Furlong)
     """
 
+    name: str = "furlong"
+    symbol: str = "fur"
+    meters_per_unit: float = 201.168
+
     def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base):
         """
         Initializes a Furlong unit with a specified metric prefix.
@@ -95,4 +107,4 @@ class Furlong(LengthUnit):
             metric_prefix (MetricPrefix, optional): The metric prefix to use. Defaults to `MetricPrefix.Base`.
         """
 
-        super().__init__(name='furlong', symbol='fur', metric_prefix=metric_prefix, meters_per_unit=201.168)
+        super().__init__(metric_prefix)
