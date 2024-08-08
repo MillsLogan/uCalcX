@@ -48,7 +48,7 @@ class NauticalMile(LengthUnit):
     meters_per_unit: float = 1852.0
     metric_prefix: MetricPrefix = MetricPrefix.Base
 
-    def __init__(self, *, _=None) -> None:
+    def __init__(self, *_) -> None:
         """Initializes a new NauticalMile instance, takes an argument to conform to the `LengthUnit` class
         
         Takes an unused argument to conform to the `LengthUnit` class.

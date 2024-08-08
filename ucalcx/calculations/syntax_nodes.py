@@ -1,4 +1,4 @@
-from .lexing import Token, TokenType
+from .lexing import Token
 from typing import Optional, Self, Union
 
 

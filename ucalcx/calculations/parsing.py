@@ -7,6 +7,10 @@ class Parser:
         self.lexer = lexer
         self.current_token = None
 
+    def set_input(self, text: str) -> None:
+        self.lexer.set_input(text)
+        self.current_token = None
+
     def parse(self) -> Node:
         if self.current_token is None or self.current_token.type == TokenType.NEWLINE:
             self._advance()

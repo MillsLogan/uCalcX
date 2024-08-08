@@ -2,6 +2,7 @@ from .syntax_nodes import *
 from .parsing import Parser
 from .. import get_all_units, MetricPrefix, Measurement
 from ..length.imperial import *
+from .lexing import TokenType, Token
 
 class Interpreter:
     def __init__(self, parser: Parser):
@@ -9,6 +10,10 @@ class Interpreter:
         self.variables = {}
         self.units = get_all_units()
         self.current_node = None
+
+    def calculate(self, equation: str):
+        self.parser.set_input(equation)
+        return self.interpret()
 
     def interpret(self):
         self.current_node = self.parser.parse()
@@ -35,7 +40,6 @@ class Interpreter:
         elif isinstance(node.value, TerminalNode):
             return self._visit(node.value)
 
-    # Proof of concept
     def _resolve_measure(self, node: MeasureNode):
         scalar = self._visit(node.left)
         unit = self._get_unit(node.value)
@@ -59,7 +63,7 @@ class Interpreter:
     def _resolve_conversion(self, node: ConversionNode):
         left = self._visit(node.left)
         unit = self._get_unit(node.value)
-        return left.convert_to(unit) # TODO
+        return left.convert_to(unit) 
 
     def _resolve_assignment(self, node: AssignmentNode):
         self.variables[node.value.value] = self._visit(node.left)
