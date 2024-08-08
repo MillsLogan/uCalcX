@@ -1,28 +1,22 @@
-"""
-# length.imperial Module
+"""Module for Length Units in the Imperial or US Customary System.
 
-The `length.imperial` module provides classes for units of length within the US Customary system. This module includes various length units used primarily in the United States, with support for applying metric prefixes. The default metric prefix for these units is `MetricPrefix.Base`.
+This module provides classes for units of length in the imperial system,
+including the base unit of the inch and other common imperial units like the foot, yard,
+and mile, as well others.
 
-This module extends `LengthUnit` and supports metric prefixes.
+Each imperial unit class defines conversions to the inch, which in turn has a conversion to the meter.
 
-## Available Units:
-- **Foot**: Represents the foot unit of length.
-- **Yard**: Represents the yard unit of length.
-- **Mile**: Represents the mile unit of length.
-- **Inch**: Represents the inch unit of length.
-- **Thou (Mil)**: Represents a very small unit of length, commonly used in engineering and manufacturing.
-- **Hand**: Represents the unit used to measure the height of horses.
-
-## External Resources:
-- [US Customary Units on Wikipedia](https://en.wikipedia.org/wiki/US_customary_units)
-- [Foot on Wikipedia](https://en.wikipedia.org/wiki/Foot_(unit))
-- [Yard on Wikipedia](https://en.wikipedia.org/wiki/Yard)
-- [Mile on Wikipedia](https://en.wikipedia.org/wiki/Mile)
+For more information about the imperial system and its units, refer to the following resources:
+- [Imperial System on Wikipedia](https://en.wikipedia.org/wiki/Imperial_units)
 - [Inch on Wikipedia](https://en.wikipedia.org/wiki/Inch)
-- [Thou (Mil) on Wikipedia](https://en.wikipedia.org/wiki/Thou_(unit))
-- [Hand on Wikipedia](https://en.wikipedia.org/wiki/Hand_(unit))
 
-The module is designed to facilitate conversions and calculations involving imperial units while allowing for optional metric prefix adjustments.
+Example:
+    All units in this module can be imported and used individually. For example, to use the `Inch` class:
+
+    >>> from ucalcx.length.imperial import Inch
+    >>> inch = Inch()
+    >>> print(inch)
+    inch (in)
 """
 
 
@@ -30,181 +24,151 @@ from ucalcx.common import MetricPrefix
 from .length_unit import LengthUnit        
 
 
-class Inch(LengthUnit):
-    """
-    Represents the inch unit of length, commonly used in the imperial system.
+class ImperialLengthUnit(LengthUnit):
+    """A base class for units of length in the Imperial or US Customary System.
 
+    This class extends the `LengthUnit` class and provides a common base for all imperial length units.
+    Most imperial units are defined in terms of each other, so for conversions, they are first converted
+    to inches and then to meters. This class assumes that the child classes define the `inches_per_unit`
+    attribute to specify the number of inches per unit. The `meters_per_unit` attribute is also defined
+    here as a default value for the conversion to meters. See the `Foot` class for a concrete example
+    of an imperial length unit.
+
+    Attributes:
+        inches_per_unit (float): The number of inches per unit of the imperial length.
+        metric_prefix (MetricPrefix): The metric prefix to apply to the imperial unit. Defaults to `MetricPrefix.Base`.
+
+        meters_per_unit (float): The number of meters per unit of the imperial length. Defaults to 0.0254.
+    """
+
+    inches_per_unit: float
+    metric_prefix: MetricPrefix = MetricPrefix.Base
+    meters_per_unit: float = 0.0254 # Also defined in Inch class just for reference
+
+    def __init__(self, *_) -> None:
+        """Initializes a new ImperialLengthUnit instance, takes an argument to conform to the `LengthUnit` class"""
+
+        super().__init__(self.metric_prefix)
+
+
+    def convert_to(self, other: LengthUnit, value: float) -> float:
+        """Converts the given value from this imperial unit to another length unit.
+        
+        This method first converts the value to inches and then to the target unit. Using meters as an intermediary.
+
+        Args:
+            other (LengthUnit): The target length unit to convert the value to.
+            value (float): The value to convert.
+
+        Returns:
+            float: The converted value in the target length unit.
+
+        Raises:
+            ValueError: If the target unit is not a valid length unit.
+        """
+
+        if isinstance(other, ImperialLengthUnit):
+            return value * (self.inches_per_unit / other.inches_per_unit)
+        return super().convert_to(other, self.convert_to(Inch(), value))
+
+
+class Thou(ImperialLengthUnit):
+    """A unit of length equal to one thousandth of an inch, commonly used in the imperial system.
+
+    - **Name**: "thou"
+    - **Symbol**: "mil"
+    - **Inches per Unit**: 0.001
+
+    More information about the thou can be found in the following resource:
+    - [Thou on Wikipedia](https://en.wikipedia.org/wiki/Thou)
+    """
+
+    name: str = "thou"
+    symbol: str = "mil"
+    inches_per_unit: float = 0.001
+
+
+class Inch(ImperialLengthUnit):
+    """A unit of length equal to one inch, commonly used in the imperial system.
+
+    This class is used as the base unit for the imperial length system, with other units defined in terms of inches.
+    
     - **Name**: "inch"
     - **Symbol**: "in"
+    - **Inches per Unit**: 1
     - **Meters per Unit**: 0.0254
 
-    Args:
-        metric_prefix (MetricPrefix): The metric prefix to apply to the inch unit. Defaults to `MetricPrefix.Base`.
-
-    For more information about the inch and its usage, refer to the following resource:
+    More information about the inch can be found in the following resource:
     - [Inch on Wikipedia](https://en.wikipedia.org/wiki/Inch)
     """
 
     name: str = "inch"
     symbol: str = "in"
-    meters_per_unit: float = 0.0254
+    inches_per_unit: float = 1.0
+    meters_per_unit: float = 0.0254 # Also defined in ImperialLengthUnit class just for reference
     
-    def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base) -> None:
-        """
-        Initializes an Inch unit with a specified metric prefix.
 
-        Args:
-            metric_prefix (MetricPrefix, optional): The metric prefix to use. Defaults to `MetricPrefix.Base`.
-        """
-        
-        super().__init__(metric_prefix)
-    
-    
-class Foot(LengthUnit):
+class Hand(ImperialLengthUnit):
+    """A unit of length equal to one quarter of a foot, commonly used in the imperial system for measuring horse height.
+
+    - **Name**: "hand"
+    - **Symbol**: "hh"
+    - **Inches per Unit**: 4
+
+    More information about the hand can be found in the following resource:
+    - [Hand (unit) on Wikipedia](https://en.wikipedia.org/wiki/Hand_(unit))
     """
-    Represents the foot unit of length, commonly used in the imperial system.
+
+    name: str = "hand"
+    symbol: str = "hh"
+    inches_per_unit: float = 4.0
+
+
+class Foot(ImperialLengthUnit):
+    """A unit of length equal to twelve inches, commonly used in the imperial system.
 
     - **Name**: "foot"
     - **Symbol**: "ft"
-    - **Meters per Unit**: 0.3048
+    - **Inches per Unit**: 12
 
-    Args:
-        metric_prefix (MetricPrefix): The metric prefix to apply to the foot unit. Defaults to `MetricPrefix.Base`.
-
-    For more information about the foot and its usage, refer to the following resource:
+    More information about the foot can be found in the following resource:
     - [Foot on Wikipedia](https://en.wikipedia.org/wiki/Foot_(unit))
     """
 
     name: str = "foot"
     symbol: str = "ft"
-    meters_per_unit: float = 0.3048
-    
-    def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base) -> None:
-        """
-        Initializes a Foot unit with a specified metric prefix.
-
-        Args:
-            metric_prefix (MetricPrefix, optional): The metric prefix to use. Defaults to `MetricPrefix.Base`.
-        """
-        
-        super().__init__(metric_prefix)
+    inches_per_unit: float = 12.0
         
 
-class Yard(LengthUnit):
-    """
-    Represents the yard unit of length, commonly used in the imperial system.
+class Yard(ImperialLengthUnit):
+    """A unit of length equal to three feet, commonly used in the imperial system for measuring longer distances.
 
     - **Name**: "yard"
     - **Symbol**: "yd"
-    - **Meters per Unit**: 0.9144
+    - **Inches per Unit**: 36
 
-    Args:
-        metric_prefix (MetricPrefix): The metric prefix to apply to the yard unit. Defaults to `MetricPrefix.Base`.
-
-    For more information about the yard and its usage, refer to the following resource:
-    - [Yard on Wikipedia](https://en.wikipedia.org/wiki/Yard)
+    More information about the yard can be found in the following resource:
+    - [Yard on Wikipedia](https://en.wikipedia.org/wiki/Yard_(unit))
     """
 
     name: str = "yard"
     symbol: str = "yd"
-    meters_per_unit: float = 0.9144
-    
-    def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base) -> None:
-        """
-        Initializes a Yard unit with a specified metric prefix.
+    inches_per_unit: float = 36.0        
 
-        Args:
-            metric_prefix (MetricPrefix, optional): The metric prefix to use. Defaults to `MetricPrefix.Base`.
-        """
-        
-        super().__init__(metric_prefix)
-        
 
-class Mile(LengthUnit):
-    """
-    Represents the mile unit of length, commonly used in the imperial system.
+class Mile(ImperialLengthUnit):
+    """A unit of length equal to 5,280 feet, commonly used in the imperial system for measuring long distances.
 
     - **Name**: "mile"
     - **Symbol**: "mi"
-    - **Meters per Unit**: 1609.34
+    - **Feet per Unit**: 5280
 
-    Args:
-        metric_prefix (MetricPrefix): The metric prefix to apply to the mile unit. Defaults to `MetricPrefix.Base`.
-
-    For more information about the mile and its usage, refer to the following resource:
+    More information about the mile can be found in the following resource:
     - [Mile on Wikipedia](https://en.wikipedia.org/wiki/Mile)
     """
 
     name: str = "mile"
     symbol: str = "mi"
-    meters_per_unit: float = 1609.344
+    inches_per_unit: float = 63360.0
 
-    def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base):
-        """
-        Initializes a Mile unit with a specified metric prefix.
-
-        Args:
-            metric_prefix (MetricPrefix, optional): The metric prefix to use. Defaults to `MetricPrefix.Base`.
-        """
-        
-        super().__init__(metric_prefix)
-
-class Thou(LengthUnit):
-    """
-    Represents the thou (mil) unit of length, commonly used in engineering and manufacturing within the imperial system.
-
-    - **Name**: "thou"
-    - **Symbol**: "thou"
-    - **Meters per Unit**: 0.0000254
-
-    Args:
-        metric_prefix (MetricPrefix): The metric prefix to apply to the thou unit. Defaults to `MetricPrefix.Base`.
-
-    For more information about the thou and its usage, refer to the following resource:
-    - [Thou on Wikipedia](https://en.wikipedia.org/wiki/Thou_(unit))
-    """
-
-    name: str = "thou"
-    symbol: str = "mil"
-    meters_per_unit: float = 0.0000254
-
-    def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base):
-        """
-        Initializes a Thou unit with a specified metric prefix.
-
-        Args:
-            metric_prefix (MetricPrefix, optional): The metric prefix to use. Defaults to `MetricPrefix.Base`.
-        """
-
-        super().__init__(metric_prefix)
-
-    
-class Hand(LengthUnit):
-    """
-    Represents the hand unit of length, commonly used to measure the height of horses within the imperial system.
-
-    - **Name**: "hand"
-    - **Symbol**: "hh"
-    - **Meters per Unit**: 0.1016
-
-    Args:
-        metric_prefix (MetricPrefix): The metric prefix to apply to the hand unit. Defaults to `MetricPrefix.Base`.
-
-    For more information about the hand and its usage, refer to the following resource:
-    - [Hand on Wikipedia](https://en.wikipedia.org/wiki/Hand_(unit))
-    """
-
-    name: str = "hand"
-    symbol: str = "hh"
-    meters_per_unit: float = 0.1016
-
-    def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base):
-        """
-        Initializes a Hand unit with a specified metric prefix.
-
-        Args:
-            metric_prefix (MetricPrefix, optional): The metric prefix to use. Defaults to `MetricPrefix.Base`.
-        """
-        
-        super().__init__(metric_prefix)
 

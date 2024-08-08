@@ -5,7 +5,7 @@ class Unit:
     An abstract class that defines the required properties for a unit of measurement. Units can be characterized by their name, symbol, metric prefix, and the physical quantity they measure.
 
     Parameters:
-        ame (str): The name of the unit (e.g., "meter").
+        name (str): The name of the unit (e.g., "meter").
         symbol (str): The symbol of the unit (e.g., "m").
         metric_prefix (MetricPrefix): The metric prefix associated with the unit.
         quantity (Quantity): The physical quantity that the unit measures.

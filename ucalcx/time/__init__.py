@@ -37,3 +37,11 @@ from .time_unit import TimeUnit
 from .units_of_time import Second, Minute, Hour, Day, Week, Month, Year
 
 __all__ = ["TimeUnit", "Second", "Minute", "Hour", "Day", "Week", "Month", "Year"]
+
+
+def get_all_units():
+    """
+    Returns a list of all time units.
+    """
+    
+    return [Second, Minute, Hour, Day, Week, Month, Year]

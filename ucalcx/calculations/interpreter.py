@@ -1,9 +1,7 @@
 from .syntax_nodes import *
 from .parsing import Parser
-from ucalcx.length.metric import Meter
-from ucalcx import MetricPrefix, Measurement
-from ucalcx.length.imperial import *
-from ucalcx.length import get_all_units
+from .. import get_all_units, MetricPrefix, Measurement
+from ..length.imperial import *
 
 class Interpreter:
     def __init__(self, parser: Parser):

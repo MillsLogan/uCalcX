@@ -1,22 +1,13 @@
-"""
-# common Module
+"""Common module for the ucalcx package.
 
-The `common` module contains universally used classes and enumerations that are integral to the functionality of uCalcX. This module and its submodules are designed to be imported internally and are not exposed to the end user directly. The primary purpose of this module is to provide a standardized way to represent measurements, units, metric prefixes, and physical quantities.
-
-## Submodules:
-    - :mod:`common.measurement`
-    - :mod:`common.unit`
-    - :mod:`common.metric_prefixes`
-    - :mod:`common.quantity`
+Provides common classes and utilities used across different modules in the ucalcx package.
 
 ## Classes:
-    - :class:`common.measurement.Measurement`
-    - :class:`common.unit.Unit`
-    - :class:`common.metric_prefixes.MetricPrefix`
-    - :class:`common.quantity.Quantity`
+    MetricPrefix: An enumeration of metric prefixes used to scale units of measurement.
+    Unit: A base class for units of measurement.
+    Quantity: A class representing a quantity with a value and a unit.
+    Measurement: A class representing a measured quantity with a value and an uncertainty.
 """
-
-
 
 from ucalcx.common.metric_prefixes import MetricPrefix
 from ucalcx.common.unit import Unit

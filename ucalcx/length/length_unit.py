@@ -2,28 +2,19 @@ from ucalcx import Unit, Quantity, Unit, MetricPrefix
 
 
 class LengthUnit(Unit):
-    """
-    # LengthUnit Class
-
-    Represents a unit of length. This class extends the `Unit` class and includes functionality for converting between different length units.
-
+    """LengthUnit class for representing units of length.
+    
+    This class provides a base class for defining units of length. It extends the `Unit` class
+    and adds additional properties specific to length units, such as the quantity of length.
+    and requires the `meters_per_unit` attribute to be defined in the derived classes.
+    
     Attributes:
-        name (str): The name of the length unit.
-        symbol (str): The symbol for the length unit.
-        metric_prefix (MetricPrefix): The metric prefix associated with the length unit.
-        meters_per_unit (float): The conversion factor to convert this unit to meters.
-
-    ## Methods:
-        convert_to(self, other: LengthUnit, value: float) -> float:
-            Converts the value from this length unit to another `LengthUnit`.
-
-    Example:
-        >>> length_unit = LengthUnit("meter", "m", MetricPrefixes.None_, 1.0)
-        >>> length_in_kilometers = LengthUnit("kilometer", "km", MetricPrefixes.Kilo, 1000.0)
-        >>> value_in_kilometers = length_unit.convert_to(length_in_kilometers, 5000.0)
-        >>> print(value_in_kilometers)
-        5.0
+        name (str): The name of the length unit (e.g., "meter", "kilometer"). This is the descriptive term used to identify the unit.
+        symbol (str): The symbol of the length unit (e.g., "m", "km"). This is the abbreviated representation used in calculations and measurements.
+        meters_per_unit (float): The factor used to convert this length unit to meters. This value represents how many meters are equivalent to one unit of this length.
+        quantity (Quantity): The quantity of length that this unit represents. Defaults to `Quantity.Length`.
     """
+
     name: str
     symbol: str
     meters_per_unit: float
@@ -34,20 +25,16 @@ class LengthUnit(Unit):
         Initializes a new instance of the LengthUnit class.
 
         Args:
-            name (str): The name of the length unit (e.g., "meter", "kilometer"). This is the descriptive term used to identify the unit.
-            symbol (str): The symbol of the length unit (e.g., "m", "km"). This is the abbreviated representation used in calculations and measurements.
-            metric_prefix (MetricPrefixes): The metric prefix associated with the length unit (e.g., `MetricPrefixes.Kilo` for kilo, `MetricPrefixes.Milli` for milli). This prefix is used to scale the unit and modify its magnitude.
-            meters_per_unit (float): The factor used to convert this length unit to meters. This value represents how many meters are equivalent to one unit of this length.
+            metric_prefix (MetricPrefix): The metric prefix to apply to the length unit.
         """
         
         super().__init__(metric_prefix) 
-        """ How many meters are equivalent to one unit of this length """
         
     def convert_to(self, other: 'LengthUnit', value: float) -> float:
-        """
-        Converts the given length value from this unit to another `LengthUnit`.
+        """Converts the given length value from this unit to another `LengthUnit`.
 
-        The method converts the given length value from this unit to another `LengthUnit` using the meter as an intermediate unit.
+        The method converts the given length value from this unit to another `LengthUnit` 
+        using the meter as an intermediate unit.
 
         Args:
             other (LengthUnit): The target length unit to convert to.
@@ -55,6 +42,9 @@ class LengthUnit(Unit):
 
         Returns:
             float: The converted length value in the target unit.
+
+        Raises:
+            ValueError: If the target unit is not a length unit.
         """
         
         if other.quantity != Quantity.Length:

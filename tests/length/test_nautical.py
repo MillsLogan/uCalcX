@@ -17,7 +17,7 @@ class TestFathom(unittest.TestCase):
     def test_fathom_attributes(self):
         self.assertEqual(self.fathom.name, "fathom")
         self.assertEqual(self.fathom.symbol, "ftm")
-        self.assertEqual(self.fathom.meters_per_unit, 1.8288)
+        self.assertEqual(self.fathom.inches_per_unit, 72.0)
 
 class TestNauticalMile(unittest.TestCase):
     def setUp(self):

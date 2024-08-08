@@ -1,112 +1,100 @@
-"""
-# length.nautical Module
+"""Module for length units commonly used in nautical and maritime contexts.
 
-The `length.nautical` module provides classes for units of length used primarily in maritime and navigation contexts. This module includes various units that are standard in nautical measurements, with support for applying metric prefixes. The default metric prefix for these units is `MetricPrefix.Base`.
+This module contains classes for units of length used in nautical and maritime contexts,
+including the nautical mile, cable, and fathom. These units are used to measure distances
+at sea and are part of the nautical system of measurement.
 
-This module extends `LengthUnit` and supports metric prefixes.
+The Fathom class is a subclass of the ImperialLengthUnit class, which provides a common
+interface for working with imperial length units. The NauticalMile and Cable classes are
+subclasses of the LengthUnit class, which provides a common interface for working with
+units of length. None of these classes take a metric prefix as an argument, as they are
+typically used in their base form.
 
-## Available Units:
-- **Fathom**: Represents the fathom unit of length, commonly used to measure water depth.
-- **Nautical Mile**: Represents the nautical mile unit of length, used in navigation and aviation, based on the Earth's circumference.
-- **Cable**: Represents the cable unit of length, used in maritime contexts to measure distance at sea.
-
-## External Resources:
-- [Fathom on Wikipedia](https://en.wikipedia.org/wiki/Fathom)
+For more information about nautical units and their history, refer to the following resources:
 - [Nautical Mile on Wikipedia](https://en.wikipedia.org/wiki/Nautical_mile)
-- [Cable (Nautical) on Wikipedia](https://en.wikipedia.org/wiki/Cable_(unit))
+- [Fathom on Wikipedia](https://en.wikipedia.org/wiki/Fathom)
+- [Cable on Wikipedia](https://en.wikipedia.org/wiki/Cable_(unit))
 
-The module is designed to facilitate conversions and calculations involving nautical units while allowing for optional metric prefix adjustments. Additional units related to nautical measurements can be added as needed.
+Example:
+    All units in this module can be imported and used individually. For example, to use the `NauticalMile` class:
+
+    >>> from ucalcx.length.nautical import NauticalMile
+    >>> nautical_mile = NauticalMile()
+    >>> print(nautical_mile)
+    nautical_mile (NM) # Note the underscore in the name
 """
 
+from ucalcx.common import MetricPrefix
+from .imperial import ImperialLengthUnit        
 from .length_unit import LengthUnit
-from ucalcx import MetricPrefix
 
-      
+
 class NauticalMile(LengthUnit):
-    """
-    Represents the nautical mile unit of length, commonly used in maritime and aviation contexts.
+    """A class representing the nautical mile unit of length.
 
-    - **Name**: "nautical mile"
+    The nautical mile is a unit of length used in maritime and navigation contexts.
+    It is equal to 1852 meters or 6076.1155 feet.
+
+    - **Name**: "nautical_mile"
     - **Symbol**: "NM"
     - **Meters per Unit**: 1852.0
 
-    Args:
-        metric_prefix (MetricPrefix): The metric prefix to apply to the nautical mile unit. Defaults to `MetricPrefix.Base`.
-
-    For more information about the nautical mile and its usage, refer to the following resource:
+    More information about the nautical mile unit can be found in the following resource:
     - [Nautical Mile on Wikipedia](https://en.wikipedia.org/wiki/Nautical_mile)
     """
 
     name: str = "nautical_mile"
     symbol: str = "NM"
     meters_per_unit: float = 1852.0
+    metric_prefix: MetricPrefix = MetricPrefix.Base
 
-    def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base) -> None:
-        """
-        Initializes a Nautical Mile unit with a specified metric prefix.
-
-        Args:
-            metric_prefix (MetricPrefix, optional): The metric prefix to use. Defaults to `MetricPrefix.Base`.
-        """
-
-        super().__init__(metric_prefix)
+    def __init__(self, *, _=None) -> None:
+        """Initializes a new NauticalMile instance, takes an argument to conform to the `LengthUnit` class
         
-        
-class Fathom(LengthUnit):
+        Takes an unused argument to conform to the `LengthUnit` class.
+        """
+
+        # Must take metric prefix as an argument to conform to the LengthUnit class
+        super().__init__(self.metric_prefix)
+
+
+class Cable(LengthUnit):
+    """A class representing the cable unit of length.
+
+    The cable is a unit of length used in maritime and navigation contexts.
+    It is equal to 185.2 meters or 608 feet.
+
+    - **Name**: "cable"
+    - **Symbol**: "cbl"
+    - **Meters per Unit**: 185.2
+
+    More information about the cable unit can be found in the following resource:
+    - [Cable on Wikipedia](https://en.wikipedia.org/wiki/Cable_(unit))
     """
-    Represents the fathom unit of length, commonly used in nautical contexts.
+
+    name: str = "cable"
+    symbol: str = "cbl"
+    meters_per_unit: float = 185.2
+    metric_prefix: MetricPrefix = MetricPrefix.Base
+    def __init__(self, *, _=None) -> None:
+        # Must take metric prefix as an argument to conform to the LengthUnit class
+        super().__init__(self.metric_prefix)
+
+
+class Fathom(ImperialLengthUnit):
+    """A class representing the fathom unit of length.
+
+    The fathom is a unit of length used in maritime and navigation contexts.
+    It is equal to 6 feet or 72 inches.
 
     - **Name**: "fathom"
     - **Symbol**: "ftm"
-    - **Meters per Unit**: 1.8288
+    - **Inches per Unit**: 72.0
 
-    Args:
-        metric_prefix (MetricPrefix): The metric prefix to apply to the fathom unit. Defaults to `MetricPrefix.Base`.
-
-    For more information about the fathom and its usage, refer to the following resource:
+    More information about the fathom unit can be found in the following resource:
     - [Fathom on Wikipedia](https://en.wikipedia.org/wiki/Fathom)
     """
 
     name: str = "fathom"
     symbol: str = "ftm"
-    meters_per_unit: float = 1.8288
-
-    def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base) -> None:
-        """
-        Initializes a Fathom unit with a specified metric prefix.
-
-        Args:
-            metric_prefix (MetricPrefix, optional): The metric prefix to use. Defaults to `MetricPrefix.Base`.
-        """
-        
-        super().__init__(metric_prefix)
-        
-    
-class Cable(LengthUnit):
-    """
-    Represents the cable unit of length, commonly used in nautical contexts.
-
-    - **Name**: "cable"
-    - **Symbol**: "cable"
-    - **Meters per Unit**: 185.2
-
-    Args:
-        metric_prefix (MetricPrefix): The metric prefix to apply to the cable unit. Defaults to `MetricPrefix.Base`.
-
-    For more information about the cable and its usage, refer to the following resource:
-    - [Cable on Wikipedia](https://en.wikipedia.org/wiki/Cable_length)
-    """
-    
-    name: str = "cable"
-    symbol: str = "cbl"
-    meters_per_unit: float = 185.2
-
-    def __init__(self, metric_prefix: MetricPrefix = MetricPrefix.Base) -> None:
-        """
-        Initializes a Cable unit with a specified metric prefix.
-
-        Args:
-            metric_prefix (MetricPrefix, optional): The metric prefix to use. Defaults to `MetricPrefix.Base`.
-        """
-        
-        super().__init__(metric_prefix)
+    inches_per_unit: float = 72.0

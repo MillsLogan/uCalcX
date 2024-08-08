@@ -1,20 +1,27 @@
-"""
-# length.metric Module
+"""Module for Length Units in the Metric System.
 
-The `metric` module provides classes for units of length within the metric system. This class extends `LengthUnit` and supports metric prefixes.
+This module contains classes for units of length in the metric system, 
+including the base unit of the meter and its metric prefixes.
 
-Available Units:
-- **Meter**: Represents the meter unit of length, the base unit in the metric system.
+For more information about the metric system and its units, refer to the following resources:
+- [Metric System on Wikipedia](https://en.wikipedia.org/wiki/Metric_system)
+- [Meter on Wikipedia](https://en.wikipedia.org/wiki/Meter)
 
 Example:
+    To use the Meter class, simply import it and create an instance:
+
+    >>> from ucalcx.length.metric import Meter
+    >>> meter = Meter()
+    >>> print(meter)
+    meter (m)
+
+    To create a kilometer unit, specify the MetricPrefix when creating the instance:
+
+    >>> from ucalcx import MetricPrefix
     >>> from ucalcx.length.metric import Meter
     >>> kilometer = Meter(MetricPrefix.Kilo)
-    >>> print(kilometer.full_name)
-    kilometer
-    >>> print(kilometer.symbol)
-    km
-    >>> print(kilometer.meters_per_unit)
-    1.0
+    >>> print(kilometer)
+    kilometer (km)
 """
 
 
@@ -22,32 +29,30 @@ from .length_unit import LengthUnit
 from ucalcx import MetricPrefix
 
 class Meter(LengthUnit):
-    """
-    Represents the meter unit of length, the base unit in the metric system.
+    """A concrete implementation of the `LengthUnit` class representing the meter unit of length.
 
-    - **Name**: "meter"
-    - **Symbol**: "m"
-    - **Meters per Unit**: 1.0 (as it represents the base unit of length)
+    The Meter class represents the base unit of length in the metric system.
+    It is equivalent to one meter and can be used to represent distances in meters
+    without any metric prefixes applied. To represent larger or smaller distances,
+    use the `MetricPrefix` enum to specify the desired metric prefix (e.g., `MetricPrefix.Kilo`
+    for kilometers).
 
-    Args:
-        metric_prefix (MetricPrefix): The metric prefix to apply to the meter unit (e.g., `MetricPrefix.Kilo` for kilometers).
-
-    For more information about the meter and its usage, refer to the following resource:
-    - [Meter on Wikipedia](https://en.wikipedia.org/wiki/Meter)
+    Attributes:
+        symbol (str): The symbol for the meter unit, 'm'.
+        name (str): The name of the unit, "meter".
+        meters_per_unit (float): The number of meters per unit (1.0 for the base meter unit).
     """
 
     symbol = 'm'
-    meters_per_unit = 1.0
     name = "meter"
+    meters_per_unit = 1.0
+    
     
     def __init__(self, metric_prefix: 'MetricPrefix'=MetricPrefix.Base):
-        """
-        Initializes a new instance of the Meter class.
+        """Initializes a new Meter instance with an optional metric prefix.
 
         Args:
-            metric_prefix (MetricPrefix): The metric prefix to apply to the meter unit (e.g., `MetricPrefix.Kilo` for kilometers).
-
-        Sets the unit name to "meter", the symbol to "m", and the conversion factor to 1.0, representing the base meter unit.
+            metric_prefix (MetricPrefix, optional): The metric prefix to apply to the meter unit. Defaults to `MetricPrefix.Base`.
         """
         
         super().__init__(metric_prefix)

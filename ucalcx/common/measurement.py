@@ -6,15 +6,11 @@ class Measurement:
     """
     # Measurement Class
 
-    Represents a measurement consisting of a numerical value and a unit of measurement. This class allows for the representation and manipulation of measurements with different units.
+    The `Measurement` class represents a physical quantity with a value and a unit. It is used to perform arithmetic operations between measurements and scalar values. The class is immutable and can be used to convert between units, add, subtract, multiply, and divide measurements.
 
     Attributes:
         value (float): The numerical value of the measurement.
-        unit (Unit): The unit associated with the measurement.
-
-    ## Methods:
-        convert_to(other_unit: Unit) -> Measurement:
-            Converts the measurement to the specified `other_unit`. This method checks that the `other_unit` measures the same physical quantity as the current unit, performs the conversion, and returns a new `Measurement` object with the converted value.
+        unit (Unit): The unit of the measurement.
     """
     
     value: float
