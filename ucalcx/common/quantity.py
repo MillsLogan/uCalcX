@@ -1,59 +1,22 @@
 from enum import Enum
 
 
-class Quantity(Enum):
-    """
-    # Quantity Enum
-
-    Represents the physical quantities that can be measured.
-
-    Attributes:
-        name (str): The name of the quantity (e.g., "Length").
-        symbol (str): The generally accepted variable symbol for the quantity (e.g., "L" for Length).
-
-    
-
-    Example:
-        >>> Quantity.Length.name
-        'Length'
-        >>> Quantity.Length.symbol
-        'L'
-    """
-
-    
-    Length = {'symbol': 'L'}
-    """ Length (L) """
-    
-    Time = {'symbol': 'T'}
-    """ Time (T) """
-    
-    Mass = {'symbol': 'M'}
-    """ Mass (M) """
-    
-    ElectricCurrent = {'symbol': 'I'}
-    """ Electric Current (I) """
-    
-    Temperature = {'symbol': '\u0398'}
-    """ Temperature (Θ) """
-    AmountOfSubstance = {'symbol': 'N'}
-    """ Amount of Substance (N) """
-    
-    LuminousIntensity = {'symbol': 'J'}
-    """ Luminous Intensity (J) """
+class FundamentalQuantity(Enum):
+    Length = {"name": "Length", "symbol": "L"}
+    Mass = {"name": "Mass", "symbol": "M"}
+    Time = {"name": "Time", "symbol": "T"}
+    Current = {"name": "Current", "symbol": "I"}
+    Temperature = {"name": "Temperature", "symbol": "T"}
+    AmountOfSubstance = {"name": "Amount of Substance", "symbol": "N"}
+    LuminousIntensity = {"name": "Luminous Intensity", "symbol": "J"}
+    Unitless = {"name": "Coefficient", "symbol": ""}
     
     @property
-    def symbol(self) -> str:
-        """ Returns the symbol of the quantity. """
-        return self.value['symbol']
-    
+    def quantity_name(self):
+        return self.value["name"]
+
     @property
-    def name(self) -> str:
-        """ Returns the name of the quantity. """
-        if self == Quantity.ElectricCurrent:
-            return "Electric Current"
-        elif self == Quantity.LuminousIntensity:
-            return "Luminous Intensity"
-        elif self == Quantity.AmountOfSubstance:
-            return "Amount of Substance"
-        
-        return super().name
+    def quantity_symbol(self):
+        return self.value["symbol"]
+    
+    
