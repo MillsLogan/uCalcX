@@ -15,8 +15,8 @@ class ImperialFundamentalLengthUnit(FundamentalLengthUnit):
 
     def convert_to(self, other: FundamentalLengthUnit, value: float) -> float:
         if isinstance(other, ImperialFundamentalLengthUnit):
-            return value * (self.inches_per_unit / other.inches_per_unit)
-        return super().convert_to(other, self.convert_to(inch, value))
+            return value * ((self.inches_per_unit / other.inches_per_unit) ** self.power)
+        return super().convert_to(other, value)
     
 
 thou = mil = ImperialFundamentalLengthUnit(name="thou",

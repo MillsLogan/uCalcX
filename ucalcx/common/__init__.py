@@ -1,6 +1,6 @@
 from .quantity import FundamentalQuantity
-from .unit import Unit, QuantityComponent
 from .metric_prefix import MetricPrefix
-from .quantity_component import FundamentalQuantityUnit, QuantityComponent
+from .fundamental_unit import FundamentalQuantityUnit
+from .unit import Unit
 
-__all__ = ["FundamentalQuantity", "Unit", "FundamentalQuantityUnit", "QuantityComponent", "MetricPrefix"]
+__all__ = ["FundamentalQuantity", "Unit", "FundamentalQuantityUnit", "MetricPrefix"]
