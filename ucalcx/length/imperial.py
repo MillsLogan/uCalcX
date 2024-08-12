@@ -6,8 +6,8 @@ class ImperialFundamentalLengthUnit(FundamentalLengthUnit):
     _name: str
     _symbol: str
 
-    def __init__(self, name: str, symbol: str, inches_per_unit: float, power: int=1):
-        super().__init__(name=name, symbol=symbol, power=power)
+    def __init__(self, name: str, symbol: str, inches_per_unit: float):
+        super().__init__(name=name, symbol=symbol)
         self.inches_per_unit = inches_per_unit
 
     def meters_per_unit(self) -> float:
@@ -15,7 +15,7 @@ class ImperialFundamentalLengthUnit(FundamentalLengthUnit):
 
     def convert_to(self, other: FundamentalLengthUnit, value: float) -> float:
         if isinstance(other, ImperialFundamentalLengthUnit):
-            return value * ((self.inches_per_unit / other.inches_per_unit) ** self.power)
+            return value * self.inches_per_unit / other.inches_per_unit
         return super().convert_to(other, value)
     
 

@@ -3,16 +3,15 @@ from common import FundamentalQuantity, FundamentalQuantityUnit, MetricPrefix
 
 
 class FundamentalTimeUnit(FundamentalQuantityUnit):
-    def __init__(self, name: str, symbol: str, seconds_per_unit, power: int=1):
-        super().__init__(name=name, symbol=symbol, quantity=FundamentalQuantity.Time, power=power)
+    def __init__(self, name: str, symbol: str, seconds_per_unit):
+        super().__init__(name=name, symbol=symbol, quantity=FundamentalQuantity.Time)
         self._seconds_per_unit = seconds_per_unit
 
     def _conversion_method(self, other: "FundamentalTimeUnit", value: float) -> float:
         if not isinstance(other, FundamentalTimeUnit):
             raise ValueError(f"Tried to convert {self} to {other}. Expected two time units.")
         
-        this_to_other_factor = self.seconds_per_unit() / other.seconds_per_unit()
-        return value * (this_to_other_factor ** self.power)
+        return value * self.seconds_per_unit() / other.seconds_per_unit()
     
     def seconds_per_unit(self) -> float:
         return self._seconds_per_unit

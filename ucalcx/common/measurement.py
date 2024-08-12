@@ -5,7 +5,7 @@ class Measurement:
     def __init__(self, value: float, unit: Unit):
         self.value = value
         if isinstance(unit, FundamentalQuantityUnit):
-            unit = Unit.from_fundamental_units(unit)
+            unit = Unit.from_fundamental_units((unit, 1,))
         elif not isinstance(unit, Unit):
             raise ValueError("The unit must be a Unit or a FundamentalQuantityUnit")
         self.unit = unit
@@ -24,7 +24,7 @@ class Measurement:
     
     def __sub__(self, other: "Measurement") -> "Measurement":
         # This will throw a ValueError if the units are incompatible
-        others_converted = other.convert_to(self.unit, other.value)
+        others_converted = other.unit.convert_to(self.unit, other.value)
 
         return Measurement(value=self.value - others_converted, unit=self.unit)
     
@@ -32,9 +32,10 @@ class Measurement:
         # Convert all components that are shared to a common unit in that dimension
         new_value = other.value
         for component in self.unit.components:
-            other_component = other.unit.dimension[component.quantity]
-            if other_component is not None:
-                new_value = other_component.convert_to(component.with_power(other_component.power), other.value)
+            other_component = other.unit.dimension[component['unit'].quantity]
+            if other_component is not None and other_component['power'] != 0:
+                new_value = other.value ** (1/other_component['power'])
+                new_value = other_component.convert_to(component['unit'], new_value) ** other_component['power']
         return Measurement(value=self.value * new_value, unit=self.unit * other.unit)
 
 
@@ -42,7 +43,8 @@ class Measurement:
         # Convert all components that are shared to a common unit in that dimension
         new_value = other.value
         for component in self.unit.components:
-            other_component = other.unit.dimension[component.quantity]
-            if other_component is not None:
-                new_value = other_component.convert_to(component.with_power(other_component.power), other.value)
+            other_component = other.unit.dimension[component['unit'].quantity]
+            if other_component is not None and other_component['power'] != 0:
+                new_value = other.value ** (1/other_component['power'])
+                new_value = other_component.convert_to(component['unit'], new_value) ** other_component['power']
         return Measurement(value=self.value / new_value, unit=self.unit / other.unit)

@@ -1,8 +1,8 @@
 from .length_unit import FundamentalLengthUnit
 
 class NauticalFundamentalLengthUnit(FundamentalLengthUnit):
-    def __init__(self, name: str, symbol: str, meters_per_unit: float, power: int=1):
-        super().__init__(name=name, symbol=symbol, power=power)
+    def __init__(self, name: str, symbol: str, meters_per_unit: float):
+        super().__init__(name=name, symbol=symbol)
         self._meters_per_unit = meters_per_unit
 
     def meters_per_unit(self) -> float:

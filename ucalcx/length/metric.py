@@ -3,8 +3,8 @@ from length import FundamentalLengthUnit
 
 
 class Meter(FundamentalLengthUnit):
-    def __init__(self, metric_prefix: MetricPrefix=MetricPrefix.Base, power: int=1):
-        super().__init__(name="meter", symbol="m", power=power)
+    def __init__(self, metric_prefix: MetricPrefix=MetricPrefix.Base):
+        super().__init__(name="meter", symbol="m")
         self.metric_prefix = metric_prefix
 
     def meters_per_unit(self) -> float:
