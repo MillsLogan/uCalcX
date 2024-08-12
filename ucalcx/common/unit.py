@@ -1,6 +1,7 @@
 from .quantity import FundamentalQuantity
 from .fundamental_unit import FundamentalQuantityUnit
 from typing import Union
+from copy import deepcopy
 
 
 class Unit:
@@ -16,6 +17,9 @@ class Unit:
                 raise ValueError(f"Cannot have multiple components for the same quantity: {component.quantity}")
             dimensions[component.quantity] = component
         return cls(dimensions)
+    
+    def copy(self) -> "Unit":
+        return deepcopy(self)
 
     @property
     def components(self) -> list[FundamentalQuantity]:
@@ -34,7 +38,7 @@ class Unit:
                 denominator.append(component.name.replace("-", ""))
                 if component.power == -1:
                     denominator[-1] = denominator[-1][:-2] # Remove ^1 from the string
-        if not numerator:
+        if not numerator and not denominator:
             numerator.append("1")
         return f"{'*'.join(numerator)}{'/' + '*'.join(denominator) if denominator else ''}".replace("-", "")
 
@@ -51,7 +55,7 @@ class Unit:
                 denominator.append(component.symbol.replace("-", ""))
                 if component.power == -1:
                     denominator[-1] = denominator[-1][:-2] # Remove ^1 from the string
-        if not numerator:
+        if not numerator and not denominator:
             numerator.append("1")
         return f"{'*'.join(numerator)}{'/' + '*'.join(denominator) if denominator else ''}".replace("-", "")
     
@@ -71,34 +75,42 @@ class Unit:
         return f"{self.name} ({self.symbol})"
                 
     def __mul__(self, other: Union[FundamentalQuantityUnit, "Unit"]) -> "Unit":
+        new_unit = self.copy()
         if isinstance(other, FundamentalQuantityUnit):
             if self.dimension[other.quantity] is not None:
-                self.dimension[other.quantity] *= other
+                new_unit.dimension[other.quantity] = self.dimension[other.quantity] * other
+            else:
+                new_unit.dimension[other.quantity] = other
         elif isinstance(other, Unit):
             for component in other.components:
                 if self.dimension[component.quantity] is not None:
-                    self.dimension[component.quantity] *= component
+                    new_unit.dimension[component.quantity] = self.dimension[component.quantity] * component
+                else:
+                    new_unit.dimension[component.quantity] = component
         else:
             raise ValueError("Cannot multiply a unit by a non-unit")
         
-        return self
+        return new_unit
     
     def __truediv__(self, other: Union[FundamentalQuantityUnit, "Unit"]) -> "Unit":
+        new_unit = self.copy()
         if isinstance(other, FundamentalQuantityUnit):
-            if self.dimension[other.quantity] is not None:
-                self.dimension[other.quantity] /= other
-                if self.dimension[other.quantity].power == 0:
-                    self.dimension[other.quantity] = None
+            if new_unit.dimension[other.quantity] is not None:
+                new_unit.dimension[other.quantity] = self.dimension[other.quantity] / other
+                if new_unit.dimension[other.quantity].power == 0:
+                    new_unit.dimension[other.quantity] = None
+            else:
+                new_unit.dimension[other.quantity] = other.with_power(-other.power)
         elif isinstance(other, Unit):
             for component in other.components:
                 if self.dimension[component.quantity] is not None:
-                    self.dimension[component.quantity] /= component
-                    if self.dimension[component.quantity].power == 0:
-                        self.dimension[component.quantity] = None
+                    new_unit.dimension[component.quantity] = self.dimension[component.quantity] / component
+                    if new_unit.dimension[component.quantity].power == 0:
+                        new_unit.dimension[component.quantity] = None
                 else:
-                    self.dimension[component.quantity] = component.with_power(-component.power)
+                    new_unit.dimension[component.quantity] = component.with_power(-component.power)
         else:
             raise ValueError("Cannot divide a unit by a non-unit")
         
-        return self
+        return new_unit
     

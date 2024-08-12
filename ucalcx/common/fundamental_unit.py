@@ -2,6 +2,7 @@ from .quantity import FundamentalQuantity
 from typing import Self
 from abc import ABC, abstractmethod
 from copy import deepcopy
+from typing import Union
 
 
 class FundamentalQuantityUnit(ABC):
@@ -45,25 +46,25 @@ class FundamentalQuantityUnit(ABC):
     def __str__(self):
         return f"{self.name} ({self.symbol})"
     
-    def __pow__(self, power: int) -> Self:
+    def __pow__(self, power: int) -> "FundamentalQuantityUnit":
         if not isinstance(power, int):
             raise ValueError("The power of a unit must be an integer")
         return self.with_power(power)
     
-    def __rmul__(self, other: int) -> Self:
+    def __rmul__(self, other: int) -> "Unit":
         if not isinstance(other, (int, float)):
             raise ValueError("Cannot multiply a unit by a non-numeric value")
         
         raise NotImplementedError("The multiplication of a unit by a scalar is not yet implemented")
     
-    def __mul__(self, other: Self) -> "Unit":
+    def __mul__(self, other: Union[Self | "Unit"]) -> "Unit":
         from .unit import Unit
         if not isinstance(other, FundamentalQuantityUnit):
             raise ValueError("Cannot multiply a unit by a non-unit")
         
         if self.quantity == other.quantity:
-            self.power += other.power
-            return deepcopy(self)
+            new_power = self.power + other.power
+            return self.with_power(new_power)
         return Unit.from_fundamental_units(self, other)
 
     def __truediv__(self, other: Self) -> "Unit":
@@ -72,10 +73,8 @@ class FundamentalQuantityUnit(ABC):
             raise ValueError("Cannot divide a unit by a non-unit")
         
         if self.quantity == other.quantity:
-            self.power -= other.power
-            return deepcopy(self)
-        other.power *= -1
-        return Unit.from_fundamental_units(self, other)
+            return self.with_power(self.power - other.power)
+        return Unit.from_fundamental_units(self, other.with_power(other.power * -1))
 
     def __div__(self, other: Self) -> "Unit":
         return self.__truediv__(other)

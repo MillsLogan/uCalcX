@@ -30,9 +30,19 @@ class Measurement:
     
     def __mul__(self, other: "Measurement") -> "Measurement":
         # Convert all components that are shared to a common unit in that dimension
+        new_value = other.value
         for component in self.unit.components:
             other_component = other.unit.dimension[component.quantity]
             if other_component is not None:
-                other.value = other_component.convert_to(component.with_power(other_component.power), other.value)
-        return Measurement(value=self.value * other.value, unit=self.unit * other.unit)
+                new_value = other_component.convert_to(component.with_power(other_component.power), other.value)
+        return Measurement(value=self.value * new_value, unit=self.unit * other.unit)
 
+
+    def __truediv__(self, other: "Measurement") -> "Measurement":
+        # Convert all components that are shared to a common unit in that dimension
+        new_value = other.value
+        for component in self.unit.components:
+            other_component = other.unit.dimension[component.quantity]
+            if other_component is not None:
+                new_value = other_component.convert_to(component.with_power(other_component.power), other.value)
+        return Measurement(value=self.value / new_value, unit=self.unit / other.unit)
