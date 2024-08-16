@@ -2,6 +2,22 @@ from .unit import Unit
 from .fundamental_unit import FundamentalQuantityUnit
 
 class Measurement:
+    """ Measurement Class
+    
+    Represents a measurement with a value and a unit.
+    
+    Attributes:
+        value (float): The value of the measurement.
+        unit (Unit): The unit of the measurement.
+        
+    Examples:
+        >>> from ucalcx import Measurement, Unit
+        >>> length = Unit.from_fundamental_units((Unit.meter, 1,))
+        >>> length_measurement = Measurement(5, length)
+        >>> length_measurement
+        Measurement(5, Unit({length: FQUnit(meter, m, length), power: 1}))
+    """
+    
     def __init__(self, value: float, unit: Unit):
         self.value = value
         if isinstance(unit, FundamentalQuantityUnit):
@@ -11,6 +27,8 @@ class Measurement:
         self.unit = unit
 
     def convert_to(self, other: Unit) -> "Measurement":
+        """ Convert the measurement to a new unit. """
+        
         return Measurement(value=self.unit.convert_to(other, self.value), unit=other)
     
     def __str__(self):
@@ -35,7 +53,7 @@ class Measurement:
             other_component = other.unit.dimension[component['unit'].quantity]
             if other_component is not None and other_component['power'] != 0:
                 new_value = other.value ** (1/other_component['power'])
-                new_value = other_component.convert_to(component['unit'], new_value) ** other_component['power']
+                new_value = other_component['unit'].convert_to(component['unit'], new_value) ** other_component['power']
         return Measurement(value=self.value * new_value, unit=self.unit * other.unit)
 
 
@@ -46,5 +64,8 @@ class Measurement:
             other_component = other.unit.dimension[component['unit'].quantity]
             if other_component is not None and other_component['power'] != 0:
                 new_value = other.value ** (1/other_component['power'])
-                new_value = other_component.convert_to(component['unit'], new_value) ** other_component['power']
+                new_value = other_component['unit'].convert_to(component['unit'], new_value) ** other_component['power']
         return Measurement(value=self.value / new_value, unit=self.unit / other.unit)
+
+    def __repr__(self):
+        return f"Measurement({self.value}, {self.unit})"

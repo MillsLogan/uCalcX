@@ -2,7 +2,7 @@ from .quantity import FundamentalQuantity
 from typing import Self
 from abc import ABC, abstractmethod
 from typing import Union, Optional
-from exceptions import IncompatibleUnitsError, InvalidValueError
+from ..exceptions import IncompatibleUnitsError, InvalidValueError
 
 
 class FundamentalQuantityUnit(ABC):

@@ -1,7 +1,9 @@
-from common import FundamentalQuantityUnit, FundamentalQuantity
+from ..common import FundamentalQuantityUnit, FundamentalQuantity
 from abc import abstractmethod, ABC
 
 class FundamentalMassUnit(FundamentalQuantityUnit, ABC):
+    """ A base class for units of mass. This class should not be instantiated directly. """
+    
     def __init__(self, name: str, symbol: str):
         super().__init__(name=name, symbol=symbol, quantity=FundamentalQuantity.Mass)
 

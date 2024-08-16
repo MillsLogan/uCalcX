@@ -1,7 +1,7 @@
 from .quantity import FundamentalQuantity
 from .fundamental_unit import FundamentalQuantityUnit
 from typing import Union, Self
-from exceptions import IncompatibleUnitsError, InvalidUnitError, InvalidOperationError, InvalidValueError
+from ..exceptions import IncompatibleUnitsError, InvalidUnitError, InvalidOperationError, InvalidValueError
 
 
 DimensionValue = dict["unit": FundamentalQuantityUnit, "power": int]
@@ -165,7 +165,7 @@ class Unit:
             for quantity in FundamentalQuantity:
                 if other.dimension[quantity]["unit"] is not None:
                     new_unit.dimension[quantity]["unit"] = other.dimension[quantity]["unit"]
-                    new_unit.dimension[quantity]["power"] = other.dimension[quantity]["power"]
+                    new_unit.dimension[quantity]["power"] += other.dimension[quantity]["power"]
         else:
             raise InvalidOperationError("Cannot multiply a unit by a non-unit, has type {type(other)}, moving the unit to the right side of the multiplication operation, with a scalar value will result in a measurment object.")
         
@@ -198,6 +198,19 @@ class Unit:
             raise InvalidOperationError("Cannot multiply a unit by a non-unit, has type {type(other)}, moving the unit to the right side of the multiplication operation, with a scalar value will result in a measurment object.")
         
         return new_unit
+    
+    def __rmul__(self, other: float | int) -> "Measurement":
+        """ Multiply the unit by a scalar value.
+        
+        Args:
+            other (float | int): The scalar value to multiply by.
+            
+        Returns:
+            Measurement: The new measurement.
+        """
+        
+        from .measurement import Measurement
+        return Measurement(other, self)
     
     def __repr__(self) -> str:
         return f"Unit({['(' + component['unit'].__repr__() + '^' + str(component['power']) + ')'  for component in self.dimension.values() if component['unit'] is not None]})"
