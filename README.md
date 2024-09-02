@@ -29,7 +29,7 @@ UCalcX provides a framework for converting between units that measure the same q
 
 ```python
 area_of_box = height_of_box * width_of_box
-# Measurement(value=51, unit=Unit(Length))
+# Measurement(value=51, meter^2 (m^2))
 ```
 
 Now we can convert this area to feet like so,
