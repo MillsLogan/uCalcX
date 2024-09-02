@@ -160,13 +160,11 @@ class FundamentalQuantityUnit(ABC):
             raise InvalidValueError(f"Expected a unit or a fundamental quantity unit, but got {other} of type {type(other)}")
         
         if isinstance(other, FundamentalQuantityUnit):
-            print("?")
             if self.quantity == other.quantity:
                 return Unit.from_fundamental_units((self, 2,))
             return Unit.from_fundamental_units((self, 1,), (other, 1,))
-        
+            
         # Call __mul__ on the Unit class
-        print("Calling __mul__ on the Unit class")
         return other * self
 
     def __truediv__(self, other: Union[Self | "Unit"]) -> Optional["Unit"]:
